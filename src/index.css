@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-cyber-bg: #111111;
+  --color-cyber-panel: #1a1a1a;
+  --color-cyber-border: #2e2e2e;
+  --color-cyber-accent: #ffffff;
+  --color-cyber-accent-hover: #e5e5e5;
+  --color-cyber-text: #ededed;
+  --color-cyber-muted: #888888;
+}
+
+body {
+  background-color: var(--color-cyber-bg);
+  color: var(--color-cyber-text);
+  font-family: var(--font-sans);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cyber-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-cyber-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-cyber-muted);
+}
+
+.glass-panel {
+  background: rgba(26, 26, 26, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-cyber-border);
+}
+
+.glow-accent {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.glow-accent:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
