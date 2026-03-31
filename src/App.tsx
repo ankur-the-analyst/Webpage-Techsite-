@@ -233,8 +233,8 @@ const Sidebar = ({ activeTab, setActiveTab }: {
   ];
 
   return (
-    <div className="w-full md:w-80 glass-panel border-b md:border-b-0 md:border-r border-cyber-border flex flex-col shrink-0 z-20 max-h-[40vh] md:max-h-none md:h-screen">
-      <div className="p-4 md:p-6 border-b border-cyber-border flex flex-row md:flex-col items-center md:items-center justify-between md:justify-start">
+    <div className="w-full md:w-64 glass-panel border-b md:border-b-0 md:border-r border-cyber-border flex flex-col shrink-0 z-20 md:sticky md:top-0 md:h-screen overflow-y-auto">
+      <div className="p-4 md:p-5 border-b border-cyber-border flex flex-row md:flex-col items-center md:items-center justify-between md:justify-start">
         <div className="flex items-center space-x-4 md:space-x-0 md:flex-col">
           <div className="w-12 h-12 md:w-24 md:h-24 rounded-full bg-cyber-panel border-2 border-cyber-accent flex items-center justify-center md:mb-4 overflow-hidden relative group shrink-0">
             <div className="absolute inset-0 bg-cyber-accent/20 group-hover:bg-cyber-accent/40 transition-colors z-10"></div>
@@ -292,14 +292,14 @@ const KPICard = ({ title, value, icon: Icon, delay }: { title: string, value: st
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay, duration: 0.5 }}
-    className="glass-panel py-8 px-6 rounded-lg flex items-center space-x-6 hover:border-cyber-accent/50 transition-colors group"
+    className="glass-panel py-3 px-3 md:py-4 md:px-5 rounded-lg flex items-center space-x-3 md:space-x-4 hover:border-cyber-accent/50 transition-colors group"
   >
-    <div className="p-4 bg-cyber-panel rounded-md text-cyber-accent group-hover:glow-accent transition-all">
-      <Icon size={28} />
+    <div className="p-2 md:p-3 bg-cyber-panel rounded-md text-cyber-accent group-hover:glow-accent transition-all">
+      <Icon className="w-4 h-4 md:w-5 md:h-5" />
     </div>
     <div>
-      <p className="text-xs text-cyber-muted font-medium uppercase tracking-wider">{title}</p>
-      <p className="text-3xl font-mono font-bold text-cyber-text mt-1">{value}</p>
+      <p className="text-[9px] md:text-[10px] text-cyber-muted font-medium uppercase tracking-wider">{title}</p>
+      <p className="text-lg md:text-2xl font-mono font-bold text-cyber-text mt-0.5">{value}</p>
     </div>
   </motion.div>
 );
@@ -314,12 +314,12 @@ const SectionTitle = ({ title, icon: Icon }: { title: string, icon: any }) => (
 const OverviewWidget = () => (
   <motion.div 
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-    className="col-span-1 lg:col-span-2 h-full flex flex-col gap-6"
+    className="col-span-1 lg:col-span-2 flex flex-col gap-6"
   >
     {/* Summary Box */}
-    <div className="glass-panel p-6 md:p-8 rounded-xl flex-shrink-0">
+    <div className="glass-panel p-5 md:p-6 rounded-xl flex-shrink-0">
       <SectionTitle title="Professional Summary" icon={Activity} />
-      <div className="space-y-4 text-sm leading-relaxed text-cyber-muted">
+      <div className="space-y-3 text-sm leading-relaxed text-cyber-muted">
         <p>
           <span className="text-cyber-accent font-mono">{'>'}</span> Versatile Product Manager and Business Intelligence professional with over 3 years of collective experience driving product lifecycles, optimizing processes, and leading cross-functional teams.
         </p>
@@ -333,11 +333,11 @@ const OverviewWidget = () => (
     </div>
     
     {/* Education & Certifications Container */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 flex-1">
       {/* Education Box */}
-      <div className="glass-panel p-6 md:p-8 rounded-xl flex flex-col justify-start">
+      <div className="glass-panel p-5 md:p-6 rounded-xl flex flex-col justify-start">
         <SectionTitle title="Education" icon={GraduationCap} />
-        <ul className="space-y-4 text-sm text-cyber-text">
+        <ul className="space-y-3 text-sm text-cyber-text">
           <li className="flex flex-col">
             <div className="flex justify-between items-start">
               <span className="font-bold text-base">MBA in Business Analytics</span>
@@ -363,7 +363,7 @@ const OverviewWidget = () => (
       </div>
 
       {/* Certifications Box */}
-      <div className="glass-panel p-6 md:p-8 rounded-xl flex flex-col justify-start">
+      <div className="glass-panel p-5 md:p-6 rounded-xl flex flex-col justify-start">
         <SectionTitle title="Certifications" icon={Award} />
         <ul className="space-y-2 text-sm text-cyber-text flex flex-wrap gap-2">
           {[
@@ -429,10 +429,10 @@ const AnalyticsWidget = () => {
   }, [step]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}
-        className="flex flex-col h-full bg-cyber-bg border border-cyber-border rounded-lg overflow-hidden relative shadow-[0_0_15px_rgba(0,0,0,0.5)] min-h-[480px]"
+        className="flex flex-col bg-cyber-panel border border-cyber-border rounded-lg overflow-hidden relative shadow-[0_0_15px_rgba(0,0,0,0.5)] min-h-[480px]"
       >
         {/* Chat Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-cyber-border bg-cyber-panel/40 backdrop-blur-sm z-10">
@@ -563,7 +563,7 @@ const AnalyticsWidget = () => {
         </div>
       </motion.div>
 
-    <div className="glass-panel p-6 rounded-lg h-full flex flex-col min-h-[480px]">
+    <div className="glass-panel p-6 rounded-lg flex flex-col min-h-[480px]">
       <SectionTitle title="Core Competencies" icon={PieChart} />
       <div className="flex-1 w-full relative mt-4">
         <ResponsiveContainer width="100%" height="100%">
@@ -617,7 +617,7 @@ const ExperienceWidget = () => {
   return (
     <motion.div 
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-      className="glass-panel p-6 rounded-lg col-span-1 lg:col-span-2 h-full flex flex-col overflow-hidden"
+      className="glass-panel p-6 rounded-lg col-span-1 lg:col-span-2 flex flex-col overflow-hidden"
     >
       <SectionTitle title="Project Tracker" icon={Layout} />
       
@@ -676,12 +676,12 @@ const ExperienceWidget = () => {
                 <div className="col-span-2">
                   <span className={`inline-flex items-center px-2 py-1 rounded-full text-[10px] font-mono border ${
                     exp.status === 'Active Sprint' 
-                      ? 'bg-cyber-accent/10 text-cyber-accent border-cyber-accent/30' 
+                      ? 'bg-green-500/10 text-green-600 border-green-500/30' 
                       : exp.status === 'Deployed'
-                      ? 'bg-green-500/10 text-green-400 border-green-500/30'
+                      ? 'bg-cyber-accent/10 text-cyber-accent border-cyber-accent/30'
                       : 'bg-cyber-bg text-cyber-muted border-cyber-border'
                   }`}>
-                    {exp.status === 'Active Sprint' && <span className="w-1.5 h-1.5 rounded-full bg-cyber-accent mr-1.5 animate-pulse"></span>}
+                    {exp.status === 'Active Sprint' && <span className="w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5 animate-pulse"></span>}
                     {exp.status}
                   </span>
                 </div>
@@ -698,7 +698,7 @@ const ExperienceWidget = () => {
                   {/* Timeline Bar */}
                   <div 
                     className={`absolute h-4 rounded-sm ${
-                      exp.status === 'Active Sprint' ? 'bg-cyber-accent' : 'bg-cyber-muted'
+                      exp.status === 'Active Sprint' ? 'bg-green-500' : exp.status === 'Deployed' ? 'bg-cyber-accent' : 'bg-cyber-muted'
                     } opacity-80 group-hover:opacity-100 transition-opacity`}
                     style={{ 
                       left: `${startOffset}%`, 
@@ -732,15 +732,15 @@ const renderGraphic = (type: string) => {
     case 'dashboard':
       return (
         <div className="w-full h-full flex flex-col gap-2">
-          <div className="w-full h-3 bg-[#1a1a1a] rounded-sm"></div>
+          <div className="w-full h-3 bg-cyber-border rounded-sm"></div>
           <div className="flex gap-2 flex-1">
             <div className="w-1/4 flex flex-col gap-2">
-              <div className="w-full h-2 bg-[#1a1a1a] rounded-sm"></div>
-              <div className="w-3/4 h-2 bg-[#1a1a1a] rounded-sm"></div>
-              <div className="w-1/2 h-2 bg-[#1a1a1a] rounded-sm"></div>
+              <div className="w-full h-2 bg-cyber-border rounded-sm"></div>
+              <div className="w-3/4 h-2 bg-cyber-border rounded-sm"></div>
+              <div className="w-1/2 h-2 bg-cyber-border rounded-sm"></div>
             </div>
-            <div className="flex-1 bg-[#1a1a1a] rounded-sm flex items-center justify-center">
-              <div className="w-8 h-8 rounded-full border-2 border-[#2a2a2a]"></div>
+            <div className="flex-1 bg-cyber-border/40 rounded-sm flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full border-2 border-cyber-border"></div>
             </div>
           </div>
         </div>
@@ -749,10 +749,10 @@ const renderGraphic = (type: string) => {
       return (
         <div className="w-full h-full flex gap-2">
           {[1, 2, 3].map(i => (
-            <div key={i} className="flex-1 bg-[#1a1a1a] rounded-sm p-1.5 flex flex-col gap-1.5">
-              <div className="w-1/2 h-1.5 bg-[#2a2a2a] rounded-sm mb-1"></div>
-              <div className="w-full h-4 bg-[#2a2a2a] rounded-sm"></div>
-              {i !== 3 && <div className="w-full h-4 bg-[#2a2a2a] rounded-sm"></div>}
+            <div key={i} className="flex-1 bg-cyber-border/40 rounded-sm p-1.5 flex flex-col gap-1.5">
+              <div className="w-1/2 h-1.5 bg-cyber-border rounded-sm mb-1"></div>
+              <div className="w-full h-4 bg-cyber-border rounded-sm"></div>
+              {i !== 3 && <div className="w-full h-4 bg-cyber-border rounded-sm"></div>}
             </div>
           ))}
         </div>
@@ -761,27 +761,27 @@ const renderGraphic = (type: string) => {
       return (
         <div className="w-full flex flex-col gap-3 px-2">
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded-full bg-[#1a1a1a] shrink-0"></div>
-            <div className="h-4 w-2/3 bg-[#1a1a1a] rounded-full"></div>
+            <div className="w-4 h-4 rounded-full bg-cyber-border shrink-0"></div>
+            <div className="h-4 w-2/3 bg-cyber-border rounded-full"></div>
           </div>
           <div className="flex items-center gap-2 justify-end">
-            <div className="h-4 w-1/2 bg-blue-900/40 rounded-full"></div>
-            <div className="w-4 h-4 rounded-full bg-blue-900/60 shrink-0"></div>
+            <div className="h-4 w-1/2 bg-blue-100 rounded-full"></div>
+            <div className="w-4 h-4 rounded-full bg-blue-200 shrink-0"></div>
           </div>
         </div>
       );
     case 'pipeline':
       return (
         <div className="w-full relative flex items-center justify-between px-4">
-          <div className="absolute left-4 right-4 h-0.5 bg-[#1a1a1a] top-1/2 -translate-y-1/2"></div>
-          <div className="w-6 h-6 rounded bg-[#1a1a1a] border border-[#2a2a2a] z-10 flex items-center justify-center">
-            <Database size={10} className="text-gray-500" />
+          <div className="absolute left-4 right-4 h-0.5 bg-cyber-border top-1/2 -translate-y-1/2"></div>
+          <div className="w-6 h-6 rounded bg-cyber-panel border border-cyber-border z-10 flex items-center justify-center">
+            <Database size={10} className="text-cyber-muted" />
           </div>
-          <div className="w-6 h-6 rounded-full bg-blue-900/20 border border-blue-900/40 z-10 flex items-center justify-center">
-            <div className="w-2 h-2 rounded-full bg-blue-500/50"></div>
+          <div className="w-6 h-6 rounded-full bg-blue-50 border border-blue-100 z-10 flex items-center justify-center">
+            <div className="w-2 h-2 rounded-full bg-blue-400/50"></div>
           </div>
-          <div className="w-6 h-6 rounded bg-[#1a1a1a] border border-[#2a2a2a] z-10 flex items-center justify-center">
-            <BarChart2 size={10} className="text-gray-500" />
+          <div className="w-6 h-6 rounded bg-cyber-panel border border-cyber-border z-10 flex items-center justify-center">
+            <BarChart2 size={10} className="text-cyber-muted" />
           </div>
         </div>
       );
@@ -820,10 +820,10 @@ const renderGraphic = (type: string) => {
 const ArchitectureWidget = () => (
   <motion.div 
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-    className="col-span-1 lg:col-span-2 h-full flex flex-col"
+    className="col-span-1 lg:col-span-2 flex flex-col"
   >
     <SectionTitle title="Project Architecture" icon={LayoutDashboard} />
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 flex-1 overflow-y-auto pr-2 pb-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
       {projectsData.map((project, idx) => (
         <motion.div 
           key={project.name}
@@ -907,11 +907,11 @@ const AILiveWidget = () => {
   return (
     <motion.div 
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-      className="glass-panel p-6 rounded-lg col-span-1 lg:col-span-2 h-full flex flex-col"
+      className="glass-panel p-6 rounded-lg col-span-1 lg:col-span-2 flex flex-col"
     >
       <SectionTitle title="Deployment & Automation" icon={Zap} />
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-[400px]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-[400px]">
         {/* Terminal */}
         <div className="bg-cyber-bg border border-cyber-border rounded-lg overflow-hidden flex flex-col h-full">
           <div className="bg-cyber-panel px-4 py-2 border-b border-cyber-border flex items-center justify-between">
@@ -1029,23 +1029,25 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen bg-cyber-bg text-cyber-text flex flex-col md:flex-row font-sans selection:bg-cyber-accent selection:text-cyber-bg overflow-hidden">
+    <div className="h-screen overflow-hidden bg-cyber-bg text-cyber-text flex flex-col md:flex-row font-sans selection:bg-cyber-accent selection:text-cyber-bg">
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
       
-      <main className="flex-1 flex flex-col overflow-hidden relative">
+      <main className="flex-1 flex flex-col relative overflow-hidden">
         {/* Top Header KPIs */}
-        <header className="p-4 md:p-6 border-b border-cyber-border bg-cyber-bg/80 backdrop-blur-md z-10 shrink-0 overflow-x-auto">
-          <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 min-w-max md:min-w-0 pb-2 md:pb-0">
+        <header className="p-3 md:p-4 border-b border-cyber-border bg-cyber-bg/80 backdrop-blur-md z-10 shrink-0">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             <KPICard title="Total Experience" value="3+ Yrs" icon={Briefcase} delay={0.1} />
             <KPICard title="Projects Delivered" value="8+" icon={Layers} delay={0.2} />
             <KPICard title="Core Focus" value="PM/BI" icon={Cpu} delay={0.3} />
             <KPICard title="Students Trained" value="1000+" icon={Terminal} delay={0.4} />
           </div>
-        </header>
+        </div>
+      </header>
 
         {/* Main Content Area */}
-        <div className="flex-1 overflow-y-auto p-4 md:p-6">
-          <div className="w-full h-full pb-20 md:pb-0">
+        <div className="flex-1 p-4 md:p-6 overflow-y-auto custom-scrollbar">
+          <div className="w-full pb-10 max-w-7xl mx-auto">
             {renderContent()}
           </div>
         </div>
