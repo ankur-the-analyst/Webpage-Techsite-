@@ -119,7 +119,7 @@ const experienceData = [
   },
   {
     id: 3,
-    company: 'E-Solutions International',
+    company: 'E-Solutions International (Contract)',
     role: 'Software Project Manager (Contract)',
     focus: 'Scrum calls, timeline management, Agile with Azure DevOps',
     status: 'Deployed',
@@ -143,7 +143,7 @@ const experienceData = [
   },
   {
     id: 5,
-    company: '360 Degree Cloud',
+    company: '360 Degree Cloud (Contract)',
     role: 'Consultant',
     focus: 'Salesforce org admin, data cleaning, ETL, automated workflows',
     status: 'Archived',
@@ -401,33 +401,37 @@ const AnalyticsWidget = () => {
       const timer = setTimeout(() => setStep(1), 800);
       return () => clearTimeout(timer);
     } else if (step === 1) {
-      let i = 0;
+      const words = userMessage.split(' ');
+      let wordIndex = 0;
       const interval = setInterval(() => {
-        setInputText(userMessage.slice(0, i + 1));
-        i++;
-        if (i > userMessage.length) {
+        const currentText = words.slice(0, wordIndex + 1).join(' ');
+        setInputText(currentText);
+        wordIndex++;
+        if (wordIndex >= words.length) {
           clearInterval(interval);
           setTimeout(() => {
             setUserText(userMessage);
             setInputText('');
             setStep(2);
-          }, 400);
+          }, 800);
         }
-      }, 70);
+      }, 180);
       return () => clearInterval(interval);
     } else if (step === 2) {
       const timer = setTimeout(() => setStep(3), 1500);
       return () => clearTimeout(timer);
     } else if (step === 3) {
-      let i = 0;
+      const words = aiMessage.split(' ');
+      let wordIndex = 0;
       const interval = setInterval(() => {
-        setAiText(aiMessage.slice(0, i + 1));
-        i++;
-        if (i > aiMessage.length) {
+        const currentText = words.slice(0, wordIndex + 1).join(' ');
+        setAiText(currentText);
+        wordIndex++;
+        if (wordIndex >= words.length) {
           clearInterval(interval);
           setTimeout(() => setStep(4), 600);
         }
-      }, 20);
+      }, 100);
       return () => clearInterval(interval);
     }
   }, [step]);
@@ -435,8 +439,8 @@ const AnalyticsWidget = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}
-        className="flex flex-col bg-cyber-panel border border-cyber-border rounded-lg overflow-hidden relative shadow-[0_0_15px_rgba(0,0,0,0.5)] h-full"
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
+        className="flex flex-col glass-panel rounded-lg overflow-hidden relative h-full"
       >
         {/* Chat Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-cyber-border bg-cyber-panel/40 backdrop-blur-sm z-10">
@@ -518,8 +522,8 @@ const AnalyticsWidget = () => {
                           return (
                             <motion.div
                               key={skill.subject}
-                              initial={{ opacity: 0, scale: 0.5, y: 15 }}
-                              animate={{ opacity, scale: 1, y: 0 }}
+                              initial={{ opacity: 0, y: 15 }}
+                              animate={{ opacity, y: 0 }}
                               whileHover={{ scale: 1.1, opacity: 1, textShadow: isTopSkill ? "0px 0px 12px rgba(255,255,255,0.8)" : "0px 0px 8px var(--color-cyber-accent)", zIndex: 10 }}
                               transition={{ 
                                 type: "spring", stiffness: 200, damping: 15, delay: idx * 0.05 
@@ -555,10 +559,15 @@ const AnalyticsWidget = () => {
                 }
               }}
             />
-            {step === 1 && inputText.length < userMessage.length && (
-              <span className="absolute left-4 top-1/2 -translate-y-1/2" style={{ marginLeft: `${inputText.length}ch` }}>
-                <span className="inline-block w-1.5 h-4 bg-cyber-accent animate-pulse ml-1"></span>
-              </span>
+            {step === 1 && (
+              <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none flex items-center">
+                <span className="text-sm font-mono text-transparent whitespace-pre select-none" aria-hidden="true">
+                  {inputText}
+                </span>
+                {inputText.length < userMessage.length && (
+                  <span className="inline-block w-1.5 h-4 bg-cyber-accent animate-pulse ml-0.5"></span>
+                )}
+              </div>
             )}
             <div className="absolute right-3 text-cyber-muted bg-cyber-bg/80 pl-2">
               <Send size={14} className={step === 1 && inputText.length === userMessage.length ? "text-cyber-accent" : "opacity-50"} />
