@@ -234,7 +234,7 @@ const Sidebar = ({ activeTab, setActiveTab }: { activeTab: string, setActiveTab:
         <div className="flex items-center space-x-4 md:space-x-0 md:flex-col">
           <div className="w-12 h-12 md:w-24 md:h-24 rounded-full bg-cyber-panel border-2 border-cyber-accent flex items-center justify-center md:mb-4 overflow-hidden relative group shrink-0">
             <div className="absolute inset-0 bg-cyber-accent/20 group-hover:bg-cyber-accent/40 transition-colors z-10"></div>
-            <img src="https://picsum.photos/seed/ankur/200/200" alt="Ankur Madan" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            <img src="https://raw.githubusercontent.com/ankur-the-analyst/Webpage-Techsite--main/master/Pic.jpeg" alt="Ankur Madan" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
           </div>
           <div>
             <h1 className="text-base md:text-lg font-bold text-cyber-text md:text-center tracking-tight">Ankur Madan</h1>
@@ -288,14 +288,14 @@ const KPICard = ({ title, value, icon: Icon, delay }: { title: string, value: st
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay, duration: 0.5 }}
-    className="glass-panel p-5 rounded-lg flex items-center space-x-4 hover:border-cyber-accent/50 transition-colors group"
+    className="glass-panel py-8 px-6 rounded-lg flex items-center space-x-6 hover:border-cyber-accent/50 transition-colors group"
   >
-    <div className="p-3 bg-cyber-panel rounded-md text-cyber-accent group-hover:glow-accent transition-all">
-      <Icon size={24} />
+    <div className="p-4 bg-cyber-panel rounded-md text-cyber-accent group-hover:glow-accent transition-all">
+      <Icon size={28} />
     </div>
     <div>
       <p className="text-xs text-cyber-muted font-medium uppercase tracking-wider">{title}</p>
-      <p className="text-2xl font-mono font-bold text-cyber-text mt-1">{value}</p>
+      <p className="text-3xl font-mono font-bold text-cyber-text mt-1">{value}</p>
     </div>
   </motion.div>
 );
@@ -333,7 +333,7 @@ const OverviewWidget = () => (
       {/* Education Box */}
       <div className="glass-panel p-6 md:p-8 rounded-xl flex flex-col justify-start">
         <SectionTitle title="Education" icon={GraduationCap} />
-        <ul className="space-y-5 text-sm text-cyber-text">
+        <ul className="space-y-4 text-sm text-cyber-text">
           <li className="flex flex-col">
             <div className="flex justify-between items-start">
               <span className="font-bold text-base">MBA in Business Analytics</span>
@@ -361,7 +361,7 @@ const OverviewWidget = () => (
       {/* Certifications Box */}
       <div className="glass-panel p-6 md:p-8 rounded-xl flex flex-col justify-start">
         <SectionTitle title="Certifications" icon={Award} />
-        <ul className="space-y-3 text-sm text-cyber-text flex flex-wrap gap-2">
+        <ul className="space-y-2 text-sm text-cyber-text flex flex-wrap gap-2">
           {[
             'Atlassian Agile Project Management Professional Certificate (Atlassian)', 
             'Aha! Product Management Professional Certificate (Aha!)', 
@@ -548,8 +548,8 @@ const AnalyticsWidget = () => {
               }}
             />
             {step === 1 && inputText.length < userMessage.length && (
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 ml-[1ch]" style={{ marginLeft: `calc(${inputText.length}ch + 1rem)` }}>
-                <span className="inline-block w-1.5 h-4 bg-cyber-accent animate-pulse"></span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2" style={{ marginLeft: `${inputText.length}ch` }}>
+                <span className="inline-block w-1.5 h-4 bg-cyber-accent animate-pulse ml-1"></span>
               </span>
             )}
             <div className="absolute right-3 text-cyber-muted bg-cyber-bg/80 pl-2">
