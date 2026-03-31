@@ -227,8 +227,8 @@ const Sidebar = ({ activeTab, setActiveTab }: {
   const navItems = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
     { id: 'analytics', label: 'Analytics & Skills', icon: BarChart2 },
-    { id: 'architecture', label: 'Product Architecture', icon: Layers },
     { id: 'experience', label: 'Experience', icon: Briefcase },
+    { id: 'architecture', label: 'Product Architecture', icon: Layers },
     { id: 'ai-mockup', label: 'Live Build Mockup', icon: Terminal },
   ];
 
@@ -258,7 +258,7 @@ const Sidebar = ({ activeTab, setActiveTab }: {
               onClick={() => setActiveTab(item.id)}
               className={`flex items-center space-x-2 md:space-x-3 px-3 md:px-4 py-2 md:py-3 rounded-md transition-all duration-200 whitespace-nowrap ${
                 activeTab === item.id 
-                  ? 'bg-cyber-accent/10 text-cyber-accent border-b-2 md:border-b-0 md:border-l-2 border-cyber-accent' 
+                  ? 'bg-cyber-accent/10 text-cyber-accent' 
                   : 'text-cyber-muted hover:bg-cyber-panel hover:text-cyber-text'
               }`}
             >
