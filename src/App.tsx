@@ -765,9 +765,16 @@ const ExperienceWidget = () => {
     >
       <SectionTitle title="Project Tracker" icon={Layout} />
       
+      {/* Fixed Timeline Header for Mobile/Tablet */}
+      <div className="md:hidden z-20 bg-cyber-panel/95 backdrop-blur-sm border-b border-cyber-border pb-2 mb-2 pt-1 text-[10px] font-mono text-cyber-muted uppercase tracking-wider flex justify-between w-full">
+        {Array.from({ length: totalYears + 1 }).map((_, i) => (
+          <span key={i}>{minYear + i}</span>
+        ))}
+      </div>
+
       <div className="flex-1 overflow-x-auto overflow-y-auto mt-1 md:mt-4 pr-1 md:pr-2 custom-scrollbar">
         <div className="min-w-full md:min-w-[800px]">
-          {/* Header */}
+          {/* Header for Desktop */}
         <div className="hidden md:grid sticky top-0 z-10 bg-cyber-panel/95 backdrop-blur-sm grid-cols-12 gap-4 border-b border-cyber-border pb-3 mb-4 pt-1 text-xs font-mono text-cyber-muted uppercase tracking-wider">
           <div className="col-span-3">Organization</div>
           <div className="col-span-3">Role & Focus</div>
