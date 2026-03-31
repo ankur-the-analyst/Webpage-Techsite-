@@ -233,8 +233,8 @@ const Sidebar = ({ activeTab, setActiveTab }: {
   ];
 
   return (
-    <div className="w-full md:w-64 glass-panel border-b md:border-b-0 md:border-r border-cyber-border flex flex-col shrink-0 z-20 md:sticky md:top-0 md:h-screen overflow-y-auto">
-      <div className="p-4 md:p-5 border-b border-cyber-border flex flex-row md:flex-col items-center md:items-center justify-between md:justify-start">
+    <div className="w-full md:w-64 glass-panel border-b md:border-b-0 md:border-r border-cyber-border flex flex-col shrink-0 z-20 md:sticky md:top-0 md:h-screen">
+      <div className="p-4 md:p-5 border-b border-cyber-border flex flex-row md:flex-col items-center md:items-center justify-between md:justify-start shrink-0">
         <div className="flex items-center space-x-4 md:space-x-0 md:flex-col">
           <div className="w-12 h-12 md:w-24 md:h-24 rounded-full bg-cyber-panel border-2 border-cyber-accent flex items-center justify-center md:mb-4 overflow-hidden relative group shrink-0">
             <div className="absolute inset-0 bg-cyber-accent/20 group-hover:bg-cyber-accent/40 transition-colors z-10"></div>
@@ -305,21 +305,21 @@ const KPICard = ({ title, value, icon: Icon, delay }: { title: string, value: st
 );
 
 const SectionTitle = ({ title, icon: Icon }: { title: string, icon: any }) => (
-  <div className="flex items-center space-x-2 mb-6 border-b border-cyber-border pb-2">
-    <Icon size={20} className="text-cyber-accent" />
-    <h2 className="text-lg font-bold tracking-tight text-cyber-text uppercase">{title}</h2>
+  <div className="flex items-center space-x-2 mb-4 border-b border-cyber-border pb-1.5">
+    <Icon size={18} className="text-cyber-accent" />
+    <h2 className="text-base font-bold tracking-tight text-cyber-text uppercase">{title}</h2>
   </div>
 );
 
 const OverviewWidget = () => (
   <motion.div 
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-    className="col-span-1 lg:col-span-2 flex flex-col gap-6"
+    className="col-span-1 lg:col-span-2 h-full flex flex-col gap-4 md:gap-6"
   >
     {/* Summary Box */}
-    <div className="glass-panel p-5 md:p-6 rounded-xl flex-shrink-0">
+    <div className="glass-panel p-5 md:p-6 rounded-xl flex-shrink-0 max-h-[40%] flex flex-col">
       <SectionTitle title="Professional Summary" icon={Activity} />
-      <div className="space-y-3 text-sm leading-relaxed text-cyber-muted">
+      <div className="space-y-3 text-sm leading-relaxed text-cyber-muted overflow-y-auto custom-scrollbar pr-2">
         <p>
           <span className="text-cyber-accent font-mono">{'>'}</span> Versatile Product Manager and Business Intelligence professional with over 3 years of collective experience driving product lifecycles, optimizing processes, and leading cross-functional teams.
         </p>
@@ -333,51 +333,55 @@ const OverviewWidget = () => (
     </div>
     
     {/* Education & Certifications Container */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 flex-1">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 min-h-0">
       {/* Education Box */}
-      <div className="glass-panel p-5 md:p-6 rounded-xl flex flex-col justify-start">
+      <div className="glass-panel p-4 md:p-5 rounded-xl flex flex-col min-h-0">
         <SectionTitle title="Education" icon={GraduationCap} />
-        <ul className="space-y-3 text-sm text-cyber-text">
-          <li className="flex flex-col">
-            <div className="flex justify-between items-start">
-              <span className="font-bold text-base">MBA in Business Analytics</span>
-              <span className="font-mono text-cyber-muted text-sm shrink-0 ml-2">CGPA: 8.21</span>
-            </div>
-            <span className="text-sm text-cyber-muted mt-1">Dr. APJ Abdul Kalam Tech. Univ.</span>
-          </li>
-          <li className="flex flex-col">
-            <div className="flex justify-between items-start">
-              <span className="font-bold text-base">Bachelor of Commerce</span>
-              <span className="font-mono text-cyber-muted text-sm shrink-0 ml-2">CGPA: 8.33</span>
-            </div>
-            <span className="text-sm text-cyber-muted mt-1">University of Delhi</span>
-          </li>
-          <li className="flex flex-col">
-            <div className="flex justify-between items-start">
-              <span className="font-bold text-base">Class XII</span>
-              <span className="font-mono text-cyber-muted text-sm shrink-0 ml-2">84.6%</span>
-            </div>
-            <span className="text-sm text-cyber-muted mt-1">CBSE Board</span>
-          </li>
-        </ul>
+        <div className="flex-1 overflow-y-auto custom-scrollbar pr-2">
+          <ul className="space-y-2.5 text-xs text-cyber-text">
+            <li className="flex flex-col">
+              <div className="flex justify-between items-start">
+                <span className="font-bold text-sm">MBA in Business Analytics</span>
+                <span className="font-mono text-cyber-muted text-[10px] shrink-0 ml-2">CGPA: 8.21</span>
+              </div>
+              <span className="text-[11px] text-cyber-muted mt-0.5">Dr. APJ Abdul Kalam Tech. Univ.</span>
+            </li>
+            <li className="flex flex-col">
+              <div className="flex justify-between items-start">
+                <span className="font-bold text-sm">Bachelor of Commerce</span>
+                <span className="font-mono text-cyber-muted text-[10px] shrink-0 ml-2">CGPA: 8.33</span>
+              </div>
+              <span className="text-[11px] text-cyber-muted mt-0.5">University of Delhi</span>
+            </li>
+            <li className="flex flex-col">
+              <div className="flex justify-between items-start">
+                <span className="font-bold text-sm">Class XII</span>
+                <span className="font-mono text-cyber-muted text-[10px] shrink-0 ml-2">84.6%</span>
+              </div>
+              <span className="text-[11px] text-cyber-muted mt-0.5">CBSE Board</span>
+            </li>
+          </ul>
+        </div>
       </div>
 
       {/* Certifications Box */}
-      <div className="glass-panel p-5 md:p-6 rounded-xl flex flex-col justify-start">
+      <div className="glass-panel p-4 md:p-5 rounded-xl flex flex-col min-h-0">
         <SectionTitle title="Certifications" icon={Award} />
-        <ul className="space-y-2 text-sm text-cyber-text flex flex-wrap gap-2">
-          {[
-            'Atlassian Agile Project Management Professional Certificate (Atlassian)', 
-            'Aha! Product Management Professional Certificate (Aha!)', 
-            'PMP (Infosys Springboard)', 
-            'Lean Six Sigma Yellow Belt', 
-            'Business Analytics (Excel)',
-            'BI Fundamentals (Simplilearn)',
-            'Excel Crash Course (CFI)'
-          ].map(cert => (
-            <li key={cert} className="bg-cyber-bg px-3 py-2 rounded-md text-xs border border-cyber-border leading-tight hover:border-cyber-accent/50 transition-colors">{cert}</li>
-          ))}
-        </ul>
+        <div className="flex-1 overflow-y-auto custom-scrollbar pr-2">
+          <ul className="space-y-1.5 text-[11px] text-cyber-text flex flex-wrap gap-1.5">
+            {[
+              'Atlassian Agile Project Management Professional Certificate (Atlassian)', 
+              'Aha! Product Management Professional Certificate (Aha!)', 
+              'PMP (Infosys Springboard)', 
+              'Lean Six Sigma Yellow Belt', 
+              'Business Analytics (Excel)',
+              'BI Fundamentals (Simplilearn)',
+              'Excel Crash Course (CFI)'
+            ].map(cert => (
+              <li key={cert} className="bg-cyber-bg px-2 py-1.5 rounded-md text-[10px] border border-cyber-border leading-tight hover:border-cyber-accent/50 transition-colors">{cert}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   </motion.div>
@@ -429,10 +433,10 @@ const AnalyticsWidget = () => {
   }, [step]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}
-        className="flex flex-col bg-cyber-panel border border-cyber-border rounded-lg overflow-hidden relative shadow-[0_0_15px_rgba(0,0,0,0.5)] min-h-[480px]"
+        className="flex flex-col bg-cyber-panel border border-cyber-border rounded-lg overflow-hidden relative shadow-[0_0_15px_rgba(0,0,0,0.5)] h-full"
       >
         {/* Chat Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-cyber-border bg-cyber-panel/40 backdrop-blur-sm z-10">
@@ -563,7 +567,7 @@ const AnalyticsWidget = () => {
         </div>
       </motion.div>
 
-    <div className="glass-panel p-6 rounded-lg flex flex-col min-h-[480px]">
+    <div className="glass-panel p-6 rounded-lg flex flex-col h-full">
       <SectionTitle title="Core Competencies" icon={PieChart} />
       <div className="flex-1 w-full relative mt-4">
         <ResponsiveContainer width="100%" height="100%">
@@ -820,39 +824,41 @@ const renderGraphic = (type: string) => {
 const ArchitectureWidget = () => (
   <motion.div 
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-    className="col-span-1 lg:col-span-2 flex flex-col"
+    className="col-span-1 lg:col-span-2 h-full flex flex-col"
   >
     <SectionTitle title="Project Architecture" icon={LayoutDashboard} />
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
-      {projectsData.map((project, idx) => (
-        <motion.div 
-          key={project.name}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: idx * 0.1 }}
-          className="bg-cyber-panel rounded-xl border border-cyber-border p-4 flex flex-col gap-4 hover:border-cyber-muted transition-colors min-h-[220px]"
-        >
-          {/* Header */}
-          <div className="flex items-center space-x-2">
-            <project.icon size={16} className="text-blue-400" />
-            <h3 className="text-sm font-semibold text-cyber-text">{project.name}</h3>
-          </div>
-          
-          {/* Graphic Area */}
-          <div className="h-32 bg-cyber-bg rounded-lg border border-cyber-border p-3 flex items-center justify-center relative overflow-hidden">
-             {renderGraphic(project.graphicType)}
-          </div>
-          
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 mt-auto">
-            {project.tags.map(tag => (
-              <span key={tag} className="text-[9px] font-mono text-cyber-muted bg-cyber-panel border border-cyber-border px-2 py-1 rounded">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-      ))}
+    <div className="flex-1 overflow-y-auto custom-scrollbar pr-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
+        {projectsData.map((project, idx) => (
+          <motion.div 
+            key={project.name}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: idx * 0.1 }}
+            className="bg-cyber-panel rounded-xl border border-cyber-border p-4 flex flex-col gap-4 hover:border-cyber-muted transition-colors min-h-[220px]"
+          >
+            {/* Header */}
+            <div className="flex items-center space-x-2">
+              <project.icon size={16} className="text-blue-400" />
+              <h3 className="text-sm font-semibold text-cyber-text">{project.name}</h3>
+            </div>
+            
+            {/* Graphic Area */}
+            <div className="h-32 bg-cyber-bg rounded-lg border border-cyber-border p-3 flex items-center justify-center relative overflow-hidden">
+               {renderGraphic(project.graphicType)}
+            </div>
+            
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mt-auto">
+              {project.tags.map(tag => (
+                <span key={tag} className="text-[9px] font-mono text-cyber-muted bg-cyber-panel border border-cyber-border px-2 py-1 rounded">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </div>
   </motion.div>
 );
@@ -907,11 +913,11 @@ const AILiveWidget = () => {
   return (
     <motion.div 
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-      className="glass-panel p-6 rounded-lg col-span-1 lg:col-span-2 flex flex-col"
+      className="glass-panel p-6 rounded-lg col-span-1 lg:col-span-2 h-full flex flex-col"
     >
       <SectionTitle title="Deployment & Automation" icon={Zap} />
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-[400px]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
         {/* Terminal */}
         <div className="bg-cyber-bg border border-cyber-border rounded-lg overflow-hidden flex flex-col h-full">
           <div className="bg-cyber-panel px-4 py-2 border-b border-cyber-border flex items-center justify-between">
@@ -1046,8 +1052,8 @@ export default function App() {
       </header>
 
         {/* Main Content Area */}
-        <div className="flex-1 p-4 md:p-6 overflow-y-auto custom-scrollbar">
-          <div className="w-full pb-10 max-w-7xl mx-auto">
+        <div className="flex-1 p-4 md:p-6 overflow-hidden">
+          <div className="w-full h-full max-w-7xl mx-auto flex flex-col">
             {renderContent()}
           </div>
         </div>
