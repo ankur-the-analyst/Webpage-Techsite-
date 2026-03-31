@@ -7,7 +7,7 @@ import {
   Terminal, LayoutDashboard, BarChart2, Layers, Briefcase, 
   Linkedin, Mail, Phone, ChevronRight, Play, Cpu, Database,
   Code, Layout, Zap, Activity, MessageSquare, Link, Smartphone, Send, Columns,
-  GraduationCap, Award
+  GraduationCap, Award, FileText, ExternalLink
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -71,11 +71,12 @@ const TreemapCustomContent = (props: any) => {
           >
             <span 
               style={{ 
-                color: 'var(--color-cyber-text)',
-                fontSize: width > 70 ? '10px' : '8px',
+                color: index >= 4 ? '#ffffff' : 'var(--color-cyber-text)',
+                fontSize: width > 70 ? '11px' : '9px',
+                fontWeight: 'bold',
                 fontFamily: 'var(--font-mono)',
                 textAlign: 'center',
-                lineHeight: '1.3',
+                lineHeight: '1.2',
                 display: '-webkit-box',
                 WebkitLineClamp: 4,
                 WebkitBoxOrient: 'vertical',
@@ -182,39 +183,78 @@ const experienceData = [
 const projectsData = [
   {
     name: 'HRMS',
+    description: 'Enterprise Human Resource Management System',
     icon: LayoutDashboard,
     tags: ['BRD', 'PRD', 'FIGMA FLOWS', 'PLC'],
-    graphicType: 'dashboard'
+    graphicType: 'dashboard',
+    link: ''
   },
   {
     name: 'Setu',
+    description: 'Collaborative Project Management Platform',
     icon: Columns,
     tags: ['PROJECT MGMT', 'APIS', 'SUPABASE'],
-    graphicType: 'kanban'
-  },
-  {
-    name: 'DeepSync',
-    icon: MessageSquare,
-    tags: ['PRD', 'CLIENT MGMT', 'TEAM MGMT'],
-    graphicType: 'chat'
+    graphicType: 'kanban',
+    link: ''
   },
   {
     name: 'CRM Integrations',
+    description: 'To automate Cold Outreach',
     icon: Link,
     tags: ['SALESFORCE', 'APOLLO', 'BI'],
-    graphicType: 'pipeline'
+    graphicType: 'pipeline',
+    link: ''
   },
   {
     name: 'PayNGo',
+    description: 'Next-Gen Mobile Payment Solution',
     icon: Smartphone,
     tags: ['AZURE DEVOPS', 'SCRUM'],
-    graphicType: 'mobile'
+    graphicType: 'mobile',
+    link: ''
   },
   {
     name: 'Campaign Auto',
+    description: 'Automated Marketing Campaign Engine',
     icon: Send,
     tags: ['BREVO', 'SENDGRID'],
-    graphicType: 'flowchart'
+    graphicType: 'flowchart',
+    link: ''
+  }
+];
+
+const portfolioProjectsData = [
+  {
+    name: 'Zeal AI',
+    description: 'AI Ticket Management System',
+    icon: Zap,
+    tags: ['AI AGENTS', 'PRD', 'PROTOTYPING', 'VERCEL'],
+    graphicType: 'zeal',
+    link: 'https://zeal-theta.vercel.app/'
+  },
+  {
+    name: 'Asset Manager',
+    description: 'Enterprise Asset Tracking',
+    icon: Database,
+    tags: ['INVENTORY', 'PRD', 'UAT', 'NEXT.JS'],
+    graphicType: 'asset',
+    link: 'https://asset-manager-teal.vercel.app/'
+  },
+  {
+    name: 'DeepSync',
+    description: 'Real-time Data Synchronization',
+    icon: Activity,
+    tags: ['DATA SYNC', 'PRD', 'PROTOTYPING', 'EFFRED'],
+    graphicType: 'deepsync',
+    link: 'https://deepsync-effred.vercel.app/'
+  },
+  {
+    name: 'Text to Reel',
+    description: 'AI Video Content Generator',
+    icon: Smartphone,
+    tags: ['VIDEO AI', 'PRD', 'PROTOTYPING', 'VERCEL'],
+    graphicType: 'reel',
+    link: 'https://text-to-reel.vercel.app/'
   }
 ];
 
@@ -225,65 +265,95 @@ const Sidebar = ({ activeTab, setActiveTab }: {
   setActiveTab: (t: string) => void
 }) => {
   const navItems = [
-    { id: 'overview', label: 'Overview', icon: LayoutDashboard },
-    { id: 'analytics', label: 'Analytics & Skills', icon: BarChart2 },
+    { id: 'summary', label: 'Summary', icon: LayoutDashboard },
+    { id: 'skills', label: 'Skills', icon: BarChart2 },
     { id: 'experience', label: 'Experience', icon: Briefcase },
-    { id: 'architecture', label: 'Product Architecture', icon: Layers },
-    { id: 'ai-mockup', label: 'Live Build Mockup', icon: Terminal },
+    { id: 'architecture', label: 'Portfolio Architecture', icon: Layers },
+    { id: 'ai-mockup', label: 'Strategic Impact', icon: Zap },
   ];
 
   return (
-    <div className="w-full md:w-64 glass-panel border-b md:border-b-0 md:border-r border-cyber-border flex flex-col shrink-0 z-20 md:sticky md:top-0 md:h-screen">
-      <div className="p-4 md:p-5 border-b border-cyber-border flex flex-row md:flex-col items-center md:items-center justify-between md:justify-start shrink-0">
-        <div className="flex items-center space-x-4 md:space-x-0 md:flex-col">
-          <div className="w-12 h-12 md:w-24 md:h-24 rounded-full bg-cyber-panel border-2 border-cyber-accent flex items-center justify-center md:mb-4 overflow-hidden relative group shrink-0">
-            <div className="absolute inset-0 bg-cyber-accent/20 group-hover:bg-cyber-accent/40 transition-colors z-10"></div>
-            <img src="https://raw.githubusercontent.com/ankur-the-analyst/Webpage-Techsite-/main/pic.jpeg" alt="Ankur Madan" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+    <>
+      {/* Desktop Sidebar / Mobile Top Header */}
+      <div className="w-full md:w-64 glass-panel border-b md:border-b-0 md:border-r border-cyber-border flex flex-col shrink-0 z-20 sticky top-0 md:h-screen bg-cyber-bg/80 backdrop-blur-md md:bg-transparent md:backdrop-blur-none">
+        <div className="p-4 md:p-5 border-b border-cyber-border flex flex-row md:flex-col items-center md:items-center justify-between md:justify-start shrink-0">
+          <div className="flex items-center space-x-4 md:space-x-0 md:flex-col">
+            <div className="w-12 h-12 md:w-24 md:h-24 rounded-full bg-cyber-panel border-2 border-cyber-accent flex items-center justify-center md:mb-4 overflow-hidden relative group shrink-0">
+              <div className="absolute inset-0 bg-cyber-accent/20 group-hover:bg-cyber-accent/40 transition-colors z-10"></div>
+              <img src="https://raw.githubusercontent.com/ankur-the-analyst/Webpage-Techsite-/main/pic.jpeg" alt="Ankur Madan" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            </div>
+            <div>
+              <h1 className="text-base md:text-lg font-bold text-cyber-text md:text-center tracking-tight">Ankur Madan</h1>
+              <p className="text-[10px] md:text-xs font-mono text-cyber-accent mt-0.5 md:mt-1 uppercase tracking-wider">Product Manager</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-base md:text-lg font-bold text-cyber-text md:text-center tracking-tight">Ankur Madan</h1>
-            <p className="text-[10px] md:text-xs font-mono text-cyber-accent mt-0.5 md:mt-1 uppercase tracking-wider">Product Manager</p>
+          <div className="hidden md:block">
+            <p className="text-xs font-mono text-cyber-muted mt-1 text-center">Delhi, India</p>
           </div>
         </div>
-        <div className="hidden md:block">
-          <p className="text-xs font-mono text-cyber-muted mt-1 text-center">Delhi, India</p>
+
+        {/* Scrollable Area for Nav and Footer */}
+        <div className="hidden md:flex flex-col flex-1 overflow-y-auto custom-scrollbar min-h-0">
+          {/* Desktop Navigation */}
+          <div className="flex-1 py-4 md:py-6">
+            <nav className="flex flex-col space-y-1 px-3 w-full">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab(item.id)}
+                  className={`flex items-center space-x-3 px-4 py-3 rounded-md transition-all duration-200 whitespace-nowrap ${
+                    activeTab === item.id 
+                      ? 'bg-cyber-accent/10 text-cyber-accent' 
+                      : 'text-cyber-muted hover:bg-cyber-panel hover:text-cyber-text'
+                  }`}
+                >
+                  <item.icon size={16} className={activeTab === item.id ? 'text-cyber-accent shrink-0' : 'shrink-0'} />
+                  <span className="text-sm font-medium truncate">{item.label}</span>
+                </button>
+              ))}
+            </nav>
+          </div>
+
+          {/* Desktop Footer */}
+          <div className="p-4 md:p-6 border-t border-cyber-border space-y-4 shrink-0">
+            <a href="mailto:talkwithankurmadan@gmail.com" className="flex items-center space-x-3 text-cyber-muted hover:text-cyber-accent transition-colors text-xs font-mono">
+              <Mail size={14} className="shrink-0" />
+              <span className="truncate text-ellipsis overflow-hidden">talkwithankurmadan@gmail.com</span>
+            </a>
+            <a href="tel:+919711445542" className="flex items-center space-x-3 text-cyber-muted hover:text-cyber-accent transition-colors text-xs font-mono">
+              <Phone size={14} className="shrink-0" />
+              <span>+91-9711445542</span>
+            </a>
+            <a href="https://linkedin.com/in/ankur-madan" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-cyber-muted hover:text-cyber-accent transition-colors text-xs font-mono">
+              <Linkedin size={14} className="shrink-0" />
+              <span className="truncate text-ellipsis overflow-hidden">linkedin.com/in/ankur-madan</span>
+            </a>
+          </div>
         </div>
       </div>
 
-      <div className="flex-1 py-2 md:py-6 overflow-y-auto overflow-x-auto md:overflow-x-hidden">
-        <nav className="flex md:flex-col space-x-2 md:space-x-0 md:space-y-1 px-3 min-w-max md:min-w-0 pb-2 md:pb-0">
+      {/* Mobile Bottom Navigation */}
+      <div className="md:hidden fixed bottom-0 left-0 w-full glass-panel border-t border-cyber-border z-30 px-2 py-1 bg-cyber-bg/90 backdrop-blur-lg">
+        <nav className="flex justify-around items-center h-16">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`flex items-center space-x-2 md:space-x-3 px-3 md:px-4 py-2 md:py-3 rounded-md transition-all duration-200 whitespace-nowrap ${
+              className={`flex flex-col items-center justify-center space-y-1 px-2 py-1 rounded-md transition-all duration-200 ${
                 activeTab === item.id 
-                  ? 'bg-cyber-accent/10 text-cyber-accent' 
-                  : 'text-cyber-muted hover:bg-cyber-panel hover:text-cyber-text'
+                  ? 'text-cyber-accent' 
+                  : 'text-cyber-muted'
               }`}
             >
-              <item.icon size={16} className={activeTab === item.id ? 'text-cyber-accent' : ''} />
-              <span className="text-xs md:text-sm font-medium">{item.label}</span>
+              <item.icon size={20} className={activeTab === item.id ? 'text-cyber-accent' : ''} />
+              <span className="text-[9px] font-medium uppercase tracking-tighter text-center leading-none">
+                {item.id === 'architecture' ? 'Portfolio' : item.id === 'ai-mockup' ? 'Impact' : item.label}
+              </span>
             </button>
           ))}
         </nav>
       </div>
-
-      <div className="hidden md:block p-6 border-t border-cyber-border space-y-4">
-        <a href="mailto:talkwithankurmadan@gmail.com" className="flex items-center space-x-3 text-cyber-muted hover:text-cyber-accent transition-colors text-xs font-mono">
-          <Mail size={14} className="shrink-0" />
-          <span className="truncate">talkwithankurmadan@gmail.com</span>
-        </a>
-        <a href="tel:+919711445542" className="flex items-center space-x-3 text-cyber-muted hover:text-cyber-accent transition-colors text-xs font-mono">
-          <Phone size={14} className="shrink-0" />
-          <span>+91-9711445542</span>
-        </a>
-        <a href="https://linkedin.com/in/ankur-madan" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-cyber-muted hover:text-cyber-accent transition-colors text-xs font-mono">
-          <Linkedin size={14} className="shrink-0" />
-          <span className="truncate">linkedin.com/in/ankur-madan</span>
-        </a>
-      </div>
-    </div>
+    </>
   );
 };
 
@@ -292,83 +362,86 @@ const KPICard = ({ title, value, icon: Icon, delay }: { title: string, value: st
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay, duration: 0.5 }}
-    className="glass-panel py-3 px-3 md:py-4 md:px-5 rounded-lg flex items-center space-x-3 md:space-x-4 hover:border-cyber-accent/50 transition-colors group"
+    className="glass-panel py-2.5 px-2.5 md:py-4 md:px-5 rounded-lg flex items-center space-x-2.5 md:space-x-4 hover:border-cyber-accent/50 transition-colors group"
   >
-    <div className="p-2 md:p-3 bg-cyber-panel rounded-md text-cyber-accent group-hover:glow-accent transition-all">
-      <Icon className="w-4 h-4 md:w-5 md:h-5" />
+    <div className="p-1.5 md:p-3 bg-cyber-panel rounded-md text-cyber-accent group-hover:glow-accent transition-all shrink-0">
+      <Icon className="w-3.5 h-3.5 md:w-5 md:h-5" />
     </div>
-    <div>
-      <p className="text-[9px] md:text-[10px] text-cyber-muted font-medium uppercase tracking-wider">{title}</p>
-      <p className="text-lg md:text-2xl font-mono font-bold text-cyber-text mt-0.5">{value}</p>
+    <div className="flex-1 min-w-0 flex flex-col justify-center overflow-hidden">
+      <p className="text-[8px] md:text-[10px] text-cyber-muted font-medium uppercase tracking-wider truncate leading-tight">{title}</p>
+      <p className="text-[13px] md:text-2xl font-mono font-bold text-cyber-text mt-0.5 truncate leading-none">{value}</p>
     </div>
   </motion.div>
 );
 
 const SectionTitle = ({ title, icon: Icon }: { title: string, icon: any }) => (
-  <div className="flex items-center space-x-2 mb-4 border-b border-cyber-border pb-1.5">
-    <Icon size={18} className="text-cyber-accent" />
-    <h2 className="text-base font-bold tracking-tight text-cyber-text uppercase">{title}</h2>
+  <div className="flex items-center space-x-2 mb-2 md:mb-4 border-b border-cyber-border pb-1.5">
+    <Icon size={16} className="text-cyber-accent md:w-[18px] md:h-[18px]" />
+    <h2 className="text-sm md:text-base font-bold tracking-tight text-cyber-text uppercase">{title}</h2>
   </div>
 );
 
-const OverviewWidget = () => (
+const SummaryWidget = () => (
   <motion.div 
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-    className="col-span-1 lg:col-span-2 h-full flex flex-col gap-4 md:gap-6"
+    className="col-span-1 lg:col-span-2 flex flex-col gap-4 md:gap-6 flex-1 min-h-0"
   >
     {/* Summary Box */}
-    <div className="glass-panel p-5 md:p-6 rounded-xl flex-shrink-0 max-h-[40%] flex flex-col">
+    <div className="glass-panel p-4 md:p-6 rounded-xl flex flex-col flex-1 min-h-0">
       <SectionTitle title="Professional Summary" icon={Activity} />
-      <div className="space-y-3 text-sm leading-relaxed text-cyber-muted overflow-y-auto custom-scrollbar pr-2">
-        <p>
-          <span className="text-cyber-accent font-mono">{'>'}</span> Versatile Product Manager and Business Intelligence professional with over 3 years of collective experience driving product lifecycles, optimizing processes, and leading cross-functional teams.
-        </p>
-        <p>
-          <span className="text-cyber-accent font-mono">{'>'}</span> Proven track record in building comprehensive PRDs, managing Agile sprints on Jira, and designing high-fidelity MVPs.
-        </p>
-        <p>
-          <span className="text-cyber-accent font-mono">{'>'}</span> Seeking to leverage expertise in product strategy, requirement gathering (BRD/FRD), and data-driven decision-making to deliver impactful solutions.
-        </p>
+      <div className="space-y-3 md:space-y-4 text-[13px] md:text-sm leading-relaxed text-cyber-muted pr-2 overflow-y-auto custom-scrollbar">
+        <div className="flex items-start gap-2">
+          <span className="text-cyber-accent font-mono mt-0.5 shrink-0">{'>'}</span> 
+          <p>Versatile Product Manager and Business Analysis professional with over 3 years of collective experience driving product lifecycles, optimizing processes, and leading cross-functional teams.</p>
+        </div>
+        <div className="flex items-start gap-2">
+          <span className="text-cyber-accent font-mono mt-0.5 shrink-0">{'>'}</span> 
+          <p>Proven track record in building comprehensive PRDs, managing Agile sprints on Jira, and designing high-fidelity MVPs.</p>
+        </div>
+        <div className="flex items-start gap-2">
+          <span className="text-cyber-accent font-mono mt-0.5 shrink-0">{'>'}</span> 
+          <p>Seeking to leverage expertise in product strategy, requirement gathering (BRD/FRD), and data-driven decision-making to deliver impactful solutions.</p>
+        </div>
       </div>
     </div>
     
     {/* Education & Certifications Container */}
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 min-h-0">
       {/* Education Box */}
-      <div className="glass-panel p-4 md:p-5 rounded-xl flex flex-col min-h-0">
+      <div className="glass-panel p-3 md:p-5 rounded-xl flex flex-col min-h-0">
         <SectionTitle title="Education" icon={GraduationCap} />
-        <div className="flex-1 overflow-y-auto custom-scrollbar pr-2">
-          <ul className="space-y-2.5 text-xs text-cyber-text">
+        <div className="flex-1 pr-2 overflow-y-auto custom-scrollbar">
+          <ul className="space-y-2 text-xs text-cyber-text">
             <li className="flex flex-col">
               <div className="flex justify-between items-start">
-                <span className="font-bold text-sm">MBA in Business Analytics</span>
-                <span className="font-mono text-cyber-muted text-[10px] shrink-0 ml-2">CGPA: 8.21</span>
+                <span className="font-bold text-xs md:text-sm">MBA in Business Analytics</span>
+                <span className="font-mono text-cyber-muted text-[9px] md:text-[10px] shrink-0 ml-2">CGPA: 8.21</span>
               </div>
-              <span className="text-[11px] text-cyber-muted mt-0.5">Dr. APJ Abdul Kalam Tech. Univ.</span>
+              <span className="text-[10px] md:text-[11px] text-cyber-muted mt-0.5">Dr. APJ Abdul Kalam Tech. Univ.</span>
             </li>
             <li className="flex flex-col">
               <div className="flex justify-between items-start">
-                <span className="font-bold text-sm">Bachelor of Commerce</span>
-                <span className="font-mono text-cyber-muted text-[10px] shrink-0 ml-2">CGPA: 8.33</span>
+                <span className="font-bold text-xs md:text-sm">Bachelor of Commerce</span>
+                <span className="font-mono text-cyber-muted text-[9px] md:text-[10px] shrink-0 ml-2">CGPA: 8.33</span>
               </div>
-              <span className="text-[11px] text-cyber-muted mt-0.5">University of Delhi</span>
+              <span className="text-[10px] md:text-[11px] text-cyber-muted mt-0.5">University of Delhi</span>
             </li>
             <li className="flex flex-col">
               <div className="flex justify-between items-start">
-                <span className="font-bold text-sm">Class XII</span>
-                <span className="font-mono text-cyber-muted text-[10px] shrink-0 ml-2">84.6%</span>
+                <span className="font-bold text-xs md:text-sm">Class XII</span>
+                <span className="font-mono text-cyber-muted text-[9px] md:text-[10px] shrink-0 ml-2">84.6%</span>
               </div>
-              <span className="text-[11px] text-cyber-muted mt-0.5">CBSE Board</span>
+              <span className="text-[10px] md:text-[11px] text-cyber-muted mt-0.5">CBSE Board</span>
             </li>
           </ul>
         </div>
       </div>
 
       {/* Certifications Box */}
-      <div className="glass-panel p-4 md:p-5 rounded-xl flex flex-col min-h-0">
+      <div className="glass-panel p-3 md:p-5 rounded-xl flex flex-col min-h-0">
         <SectionTitle title="Certifications" icon={Award} />
-        <div className="flex-1 overflow-y-auto custom-scrollbar pr-2">
-          <ul className="space-y-1.5 text-[11px] text-cyber-text flex flex-wrap gap-1.5">
+        <div className="flex-1 pr-2 overflow-y-auto custom-scrollbar">
+          <ul className="text-[10px] md:text-[11px] text-cyber-text flex flex-wrap gap-2">
             {[
               'Atlassian Agile Project Management Professional Certificate (Atlassian)', 
               'Aha! Product Management Professional Certificate (Aha!)', 
@@ -378,7 +451,7 @@ const OverviewWidget = () => (
               'BI Fundamentals (Simplilearn)',
               'Excel Crash Course (CFI)'
             ].map(cert => (
-              <li key={cert} className="bg-cyber-bg px-2 py-1.5 rounded-md text-[10px] border border-cyber-border leading-tight hover:border-cyber-accent/50 transition-colors">{cert}</li>
+              <li key={cert} className="bg-cyber-bg px-1.5 py-1 md:px-2 md:py-1.5 rounded-md text-[9px] md:text-[10px] border border-cyber-border leading-tight hover:border-cyber-accent/50 transition-colors">{cert}</li>
             ))}
           </ul>
         </div>
@@ -387,7 +460,20 @@ const OverviewWidget = () => (
   </motion.div>
 );
 
-const AnalyticsWidget = () => {
+const TreemapCustomTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-cyber-panel border border-cyber-border p-2 rounded shadow-lg">
+        <p className="text-[10px] font-mono font-bold text-cyber-text uppercase tracking-wider">
+          {payload[0].name}
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
+const SkillsWidget = () => {
   const [step, setStep] = useState(0); // 0: idle, 1: typing in input, 2: user sent/ai thinking, 3: ai typing, 4: complete
   const [inputText, setInputText] = useState('');
   const [userText, setUserText] = useState('');
@@ -398,7 +484,7 @@ const AnalyticsWidget = () => {
 
   useEffect(() => {
     if (step === 0) {
-      const timer = setTimeout(() => setStep(1), 800);
+      const timer = setTimeout(() => setStep(1), 1000);
       return () => clearTimeout(timer);
     } else if (step === 1) {
       const words = userMessage.split(' ');
@@ -413,12 +499,12 @@ const AnalyticsWidget = () => {
             setUserText(userMessage);
             setInputText('');
             setStep(2);
-          }, 800);
+          }, 1000);
         }
-      }, 180);
+      }, 250);
       return () => clearInterval(interval);
     } else if (step === 2) {
-      const timer = setTimeout(() => setStep(3), 1500);
+      const timer = setTimeout(() => setStep(3), 2000);
       return () => clearTimeout(timer);
     } else if (step === 3) {
       const words = aiMessage.split(' ');
@@ -429,21 +515,41 @@ const AnalyticsWidget = () => {
         wordIndex++;
         if (wordIndex >= words.length) {
           clearInterval(interval);
-          setTimeout(() => setStep(4), 600);
+          setTimeout(() => setStep(4), 1000);
         }
-      }, 100);
+      }, 200);
       return () => clearInterval(interval);
     }
   }, [step]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
+    <div className="glass-panel p-4 md:p-6 rounded-lg flex flex-col min-h-[350px] lg:h-auto lg:min-h-0">
+      <SectionTitle title="Core Competencies" icon={PieChart} />
+      <div className="flex-1 w-full relative mt-4 min-h-[250px] lg:min-h-0">
+        <ResponsiveContainer width="100%" height="100%">
+          <Treemap
+            data={coreCompetenciesData}
+            dataKey="size"
+            aspectRatio={4 / 3}
+            stroke="var(--color-cyber-bg)"
+            content={<TreemapCustomContent />}
+            isAnimationActive={false}
+          >
+            <Tooltip 
+              content={<TreemapCustomTooltip />}
+            />
+          </Treemap>
+        </ResponsiveContainer>
+      </div>
+    </div>
+
       <motion.div 
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-        className="flex flex-col glass-panel rounded-lg overflow-hidden relative h-full"
+        className="flex flex-col glass-panel rounded-lg overflow-hidden relative min-h-[400px] lg:h-auto lg:min-h-0"
       >
         {/* Chat Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-cyber-border bg-cyber-panel/40 backdrop-blur-sm z-10">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-cyber-border bg-cyber-panel/40 backdrop-blur-sm z-10 shrink-0">
           <div className="flex items-center space-x-3">
             <div className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-accent opacity-75"></span>
@@ -484,8 +590,8 @@ const AnalyticsWidget = () => {
                 <div className="w-7 h-7 rounded bg-cyber-panel border border-cyber-border flex items-center justify-center shrink-0 mt-1 shadow-sm">
                   <Terminal size={14} className="text-cyber-accent" />
                 </div>
-                <div className="flex-1 space-y-3">
-                  <div className="bg-cyber-panel/60 border border-cyber-border text-cyber-text text-sm font-mono p-3 rounded-lg rounded-tl-none shadow-sm inline-block">
+                <div className="flex-1 space-y-2 md:space-y-3">
+                  <div className="bg-cyber-panel/60 border border-cyber-border text-cyber-text text-[13px] md:text-sm font-mono p-2 md:p-3 rounded-lg rounded-tl-none shadow-sm inline-block">
                     {step === 2 ? (
                        <div className="flex space-x-1.5 items-center h-5 px-1">
                          <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1.2 }} className="w-1.5 h-1.5 bg-cyber-accent rounded-full"></motion.div>
@@ -503,15 +609,15 @@ const AnalyticsWidget = () => {
                   {step === 4 && (
                     <motion.div 
                       initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-                      className="relative w-full p-5 rounded-xl bg-gradient-to-br from-cyber-panel/80 to-cyber-bg border border-cyber-border/50 overflow-hidden shadow-inner"
+                      className="relative w-full p-3 md:p-5 rounded-xl bg-gradient-to-br from-cyber-panel/80 to-cyber-bg border border-cyber-border/50 overflow-hidden shadow-inner"
                     >
                       {/* Subtle grid background */}
                       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')] opacity-50"></div>
                       
-                      <div className="relative z-10 flex flex-wrap justify-center items-center content-center gap-x-4 gap-y-3">
+                      <div className="relative z-10 flex flex-wrap justify-center items-center content-center gap-x-2 md:gap-x-4 gap-y-2 md:gap-y-3">
                         {techSkillsData.map((skill, idx) => {
-                          const minFontSize = 0.85;
-                          const maxFontSize = 1.8;
+                          const minFontSize = 0.75;
+                          const maxFontSize = 1.5;
                           const minA = 70;
                           const maxA = 95;
                           
@@ -529,7 +635,7 @@ const AnalyticsWidget = () => {
                                 type: "spring", stiffness: 200, damping: 15, delay: idx * 0.05 
                               }}
                               style={{ fontSize: `${fontSize}rem`, lineHeight: 1.2 }}
-                              className={`font-mono font-bold cursor-default select-none text-center transition-colors px-1 ${isTopSkill ? 'text-white' : 'text-cyber-text hover:text-cyber-accent'}`}
+                              className={`font-mono font-bold cursor-default select-none text-center transition-colors px-1 ${isTopSkill ? 'text-cyber-accent' : 'text-cyber-text hover:text-cyber-accent'}`}
                             >
                               {skill.subject}
                             </motion.div>
@@ -575,27 +681,6 @@ const AnalyticsWidget = () => {
           </div>
         </div>
       </motion.div>
-
-    <div className="glass-panel p-6 rounded-lg flex flex-col h-full">
-      <SectionTitle title="Core Competencies" icon={PieChart} />
-      <div className="flex-1 w-full relative mt-4">
-        <ResponsiveContainer width="100%" height="100%">
-          <Treemap
-            data={coreCompetenciesData}
-            dataKey="size"
-            aspectRatio={4 / 3}
-            stroke="var(--color-cyber-bg)"
-            content={<TreemapCustomContent />}
-            isAnimationActive={false}
-          >
-            <Tooltip 
-              contentStyle={{ backgroundColor: 'var(--color-cyber-panel)', borderColor: 'var(--color-cyber-border)', color: 'var(--color-cyber-text)', fontFamily: 'var(--font-mono)', fontSize: '12px' }}
-              itemStyle={{ color: 'var(--color-cyber-text)' }}
-            />
-          </Treemap>
-        </ResponsiveContainer>
-      </div>
-    </div>
   </div>
   );
 };
@@ -630,14 +715,14 @@ const ExperienceWidget = () => {
   return (
     <motion.div 
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-      className="glass-panel p-6 rounded-lg col-span-1 lg:col-span-2 flex flex-col overflow-hidden"
+      className="glass-panel p-2.5 md:p-6 rounded-lg col-span-1 lg:col-span-2 flex flex-col flex-1 min-h-0"
     >
       <SectionTitle title="Project Tracker" icon={Layout} />
       
-      <div className="flex-1 overflow-x-auto overflow-y-auto mt-4 pr-2">
-        <div className="min-w-[800px]">
+      <div className="flex-1 overflow-x-auto overflow-y-auto mt-1 md:mt-4 pr-1 md:pr-2 custom-scrollbar">
+        <div className="min-w-full md:min-w-[800px]">
           {/* Header */}
-        <div className="grid grid-cols-12 gap-4 border-b border-cyber-border pb-3 mb-4 text-xs font-mono text-cyber-muted uppercase tracking-wider">
+        <div className="hidden md:grid sticky top-0 z-10 bg-cyber-panel/95 backdrop-blur-sm grid-cols-12 gap-4 border-b border-cyber-border pb-3 mb-4 pt-1 text-xs font-mono text-cyber-muted uppercase tracking-wider">
           <div className="col-span-3">Organization</div>
           <div className="col-span-3">Role & Focus</div>
           <div className="col-span-2">Status</div>
@@ -654,7 +739,7 @@ const ExperienceWidget = () => {
         </div>
 
         {/* Rows */}
-        <div className="space-y-3">
+        <div className="space-y-1.5 md:space-y-3">
           {experienceData.map((exp, idx) => {
             const startDecimal = exp.startYear + (getMonthIndex(exp.startMonth) / 12);
             const endDecimal = exp.endMonth === 'Present' ? maxYear + (getMonthIndex('Present') / 12) : exp.endYear + (getMonthIndex(exp.endMonth) / 12);
@@ -668,39 +753,39 @@ const ExperienceWidget = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                className="grid grid-cols-12 gap-4 items-center bg-cyber-panel/30 p-3 rounded border border-cyber-border hover:border-cyber-accent/50 transition-colors group"
+                className="flex flex-col md:grid md:grid-cols-12 gap-1.5 md:gap-4 items-start md:items-center bg-cyber-panel/30 p-2 md:p-3 rounded border border-cyber-border hover:border-cyber-accent/50 transition-colors group"
               >
                 {/* Organization */}
-                <div className="col-span-3 pr-2">
-                  <h4 className="text-sm font-bold text-cyber-text group-hover:text-cyber-accent transition-colors truncate">{exp.company}</h4>
-                  <p className="text-[10px] font-mono text-cyber-muted mt-1">
+                <div className="w-full md:col-span-3 pr-2">
+                  <h4 className="text-[11px] md:text-sm font-bold text-cyber-text group-hover:text-cyber-accent transition-colors truncate">{exp.company}</h4>
+                  <p className="text-[8px] md:text-[10px] font-mono text-cyber-muted mt-0.5 md:mt-1">
                     {exp.startMonth}, {exp.startYear} - {exp.endMonth === 'Present' ? 'Present' : `${exp.endMonth}, ${exp.endYear}`}
                     <span className="text-cyber-muted/50 ml-1">({getDuration(exp.startMonth, exp.startYear, exp.endMonth, exp.endYear)})</span>
                   </p>
                 </div>
 
                 {/* Role & Focus */}
-                <div className="col-span-3 pr-2">
-                  <p className="text-xs text-cyber-text truncate">{exp.role}</p>
-                  <p className="text-[10px] font-mono text-cyber-muted truncate mt-0.5">{exp.focus}</p>
+                <div className="w-full md:col-span-3 pr-2">
+                  <p className="text-[10px] md:text-xs text-cyber-text truncate">{exp.role}</p>
+                  <p className="text-[8px] md:text-[10px] font-mono text-cyber-muted truncate mt-0.5">{exp.focus}</p>
                 </div>
 
                 {/* Status */}
-                <div className="col-span-2">
-                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-[10px] font-mono border ${
+                <div className="w-full md:col-span-2">
+                  <span className={`inline-flex items-center px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[8px] md:text-[10px] font-mono border ${
                     exp.status === 'Active Sprint' 
                       ? 'bg-green-500/10 text-green-600 border-green-500/30' 
                       : exp.status === 'Deployed'
                       ? 'bg-cyber-accent/10 text-cyber-accent border-cyber-accent/30'
                       : 'bg-cyber-bg text-cyber-muted border-cyber-border'
                   }`}>
-                    {exp.status === 'Active Sprint' && <span className="w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5 animate-pulse"></span>}
+                    {exp.status === 'Active Sprint' && <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-green-500 mr-1 md:mr-1.5 animate-pulse"></span>}
                     {exp.status}
                   </span>
                 </div>
 
                 {/* Timeline */}
-                <div className="col-span-4 relative h-6 bg-cyber-bg rounded border border-cyber-border overflow-hidden flex items-center">
+                <div className="w-full md:col-span-4 relative h-4 md:h-6 bg-cyber-bg rounded border border-cyber-border overflow-hidden flex items-center">
                   {/* Grid lines for years */}
                   <div className="absolute inset-0 flex pointer-events-none opacity-20">
                     {Array.from({ length: totalYears }).map((_, i) => (
@@ -710,7 +795,7 @@ const ExperienceWidget = () => {
                   
                   {/* Timeline Bar */}
                   <div 
-                    className={`absolute h-4 rounded-sm ${
+                    className={`absolute h-2.5 md:h-4 rounded-sm ${
                       exp.status === 'Active Sprint' ? 'bg-green-500' : exp.status === 'Deployed' ? 'bg-cyber-accent' : 'bg-cyber-muted'
                     } opacity-80 group-hover:opacity-100 transition-opacity`}
                     style={{ 
@@ -726,8 +811,8 @@ const ExperienceWidget = () => {
                   
                   {/* Static Year labels */}
                   <div className="absolute inset-0 flex items-center justify-between px-2 pointer-events-none">
-                    <span className="text-[9px] font-mono text-cyber-muted/50">{exp.startMonth}, {exp.startYear}</span>
-                    <span className="text-[9px] font-mono text-cyber-muted/50">{exp.endMonth === 'Present' ? 'Present' : `${exp.endMonth}, ${exp.endYear}`}</span>
+                    <span className="text-[7px] md:text-[9px] font-mono text-cyber-muted/50">{exp.startMonth}, {exp.startYear}</span>
+                    <span className="text-[7px] md:text-[9px] font-mono text-cyber-muted/50">{exp.endMonth === 'Present' ? 'Present' : `${exp.endMonth}, ${exp.endYear}`}</span>
                   </div>
                 </div>
               </motion.div>
@@ -778,8 +863,8 @@ const renderGraphic = (type: string) => {
             <div className="h-4 w-2/3 bg-cyber-border rounded-full"></div>
           </div>
           <div className="flex items-center gap-2 justify-end">
-            <div className="h-4 w-1/2 bg-blue-100 rounded-full"></div>
-            <div className="w-4 h-4 rounded-full bg-blue-200 shrink-0"></div>
+            <div className="h-4 w-1/2 bg-cyber-border/40 rounded-full"></div>
+            <div className="w-4 h-4 rounded-full bg-cyber-muted shrink-0"></div>
           </div>
         </div>
       );
@@ -790,8 +875,8 @@ const renderGraphic = (type: string) => {
           <div className="w-6 h-6 rounded bg-cyber-panel border border-cyber-border z-10 flex items-center justify-center">
             <Database size={10} className="text-cyber-muted" />
           </div>
-          <div className="w-6 h-6 rounded-full bg-blue-50 border border-blue-100 z-10 flex items-center justify-center">
-            <div className="w-2 h-2 rounded-full bg-blue-400/50"></div>
+          <div className="w-6 h-6 rounded-full bg-cyber-panel border border-cyber-border z-10 flex items-center justify-center">
+            <div className="w-2 h-2 rounded-full bg-cyber-muted"></div>
           </div>
           <div className="w-6 h-6 rounded bg-cyber-panel border border-cyber-border z-10 flex items-center justify-center">
             <BarChart2 size={10} className="text-cyber-muted" />
@@ -825,6 +910,58 @@ const renderGraphic = (type: string) => {
           </div>
         </div>
       );
+    case 'zeal':
+      return (
+        <div className="w-full h-full flex flex-col gap-2 p-1">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-cyber-accent"></div>
+            <div className="h-2 w-1/2 bg-cyber-border rounded"></div>
+          </div>
+          <div className="flex-1 border border-dashed border-cyber-border rounded flex items-center justify-center">
+            <Zap size={20} className="text-cyber-accent opacity-30" />
+          </div>
+          <div className="h-2 w-full bg-cyber-border/40 rounded"></div>
+        </div>
+      );
+    case 'asset':
+      return (
+        <div className="w-full h-full flex flex-col gap-1.5">
+          <div className="grid grid-cols-3 gap-1">
+            {[1, 2, 3].map(i => <div key={i} className="h-2 bg-cyber-border rounded-sm"></div>)}
+          </div>
+          <div className="flex-1 grid grid-cols-3 gap-1">
+            {[1, 2, 3, 4, 5, 6].map(i => <div key={i} className="bg-cyber-border/20 rounded-sm"></div>)}
+          </div>
+        </div>
+      );
+    case 'deepsync':
+      return (
+        <div className="w-full h-full flex items-center justify-center gap-4">
+          <div className="w-8 h-8 rounded border border-cyber-border flex items-center justify-center">
+            <Database size={12} className="text-cyber-muted" />
+          </div>
+          <div className="flex flex-col items-center gap-1">
+            <div className="w-8 h-0.5 bg-cyber-accent animate-pulse"></div>
+            <div className="w-8 h-0.5 bg-cyber-accent/30"></div>
+          </div>
+          <div className="w-8 h-8 rounded-full border border-cyber-border flex items-center justify-center">
+            <Activity size={12} className="text-cyber-muted" />
+          </div>
+        </div>
+      );
+    case 'reel':
+      return (
+        <div className="w-full h-full flex gap-2">
+          <div className="w-1/3 h-full bg-cyber-border/30 rounded flex items-center justify-center">
+            <div className="w-4 h-4 bg-cyber-accent/20 rounded-sm"></div>
+          </div>
+          <div className="flex-1 flex flex-col gap-2">
+            <div className="h-2 w-full bg-cyber-border rounded"></div>
+            <div className="h-2 w-3/4 bg-cyber-border rounded"></div>
+            <div className="h-2 w-1/2 bg-cyber-border rounded"></div>
+          </div>
+        </div>
+      );
     default:
       return null;
   }
@@ -833,34 +970,47 @@ const renderGraphic = (type: string) => {
 const ArchitectureWidget = () => (
   <motion.div 
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-    className="col-span-1 lg:col-span-2 h-full flex flex-col"
+    className="col-span-1 lg:col-span-2 flex flex-col flex-1 min-h-0"
   >
-    <SectionTitle title="Project Architecture" icon={LayoutDashboard} />
-    <div className="flex-1 overflow-y-auto custom-scrollbar pr-2">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
-        {projectsData.map((project, idx) => (
+    <SectionTitle title="Portfolio Architecture" icon={Zap} />
+    <div className="flex-1 pr-2 overflow-y-auto custom-scrollbar pb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+        {[...projectsData, ...portfolioProjectsData].map((project, idx) => (
           <motion.div 
-            key={project.name}
+            key={project.name + idx}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: idx * 0.1 }}
-            className="bg-cyber-panel rounded-xl border border-cyber-border p-4 flex flex-col gap-4 hover:border-cyber-muted transition-colors min-h-[220px]"
+            transition={{ delay: idx * 0.05 }}
+            className="bg-cyber-panel rounded-xl border border-cyber-border p-3 md:p-4 flex flex-col gap-3 md:gap-4 hover:border-cyber-muted transition-colors min-h-[200px] md:min-h-[240px]"
           >
-            {/* Header */}
-            <div className="flex items-center space-x-2">
-              <project.icon size={16} className="text-blue-400" />
-              <h3 className="text-sm font-semibold text-cyber-text">{project.name}</h3>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <project.icon size={14} className={idx < projectsData.length ? "text-cyber-text" : "text-cyber-accent md:w-[16px] md:h-[16px]"} />
+                <h3 className="text-xs md:text-sm font-semibold text-cyber-text">{project.name}</h3>
+              </div>
+              {project.link && (
+                <a 
+                  href={project.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-cyber-muted hover:text-cyber-accent transition-colors"
+                >
+                  <ExternalLink size={12} className="md:w-[14px] md:h-[14px]" />
+                </a>
+              )}
             </div>
+
+            {'description' in project && (
+              <p className="text-[9px] md:text-[10px] text-cyber-muted -mt-1 md:-mt-2 leading-tight">{project.description}</p>
+            )}
             
-            {/* Graphic Area */}
-            <div className="h-32 bg-cyber-bg rounded-lg border border-cyber-border p-3 flex items-center justify-center relative overflow-hidden">
+            <div className="h-24 md:h-32 bg-cyber-bg rounded-lg border border-cyber-border p-2 md:p-3 flex items-center justify-center relative overflow-hidden">
                {renderGraphic(project.graphicType)}
             </div>
             
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mt-auto">
+            <div className="flex flex-wrap gap-1.5 md:gap-2 mt-auto">
               {project.tags.map(tag => (
-                <span key={tag} className="text-[9px] font-mono text-cyber-muted bg-cyber-panel border border-cyber-border px-2 py-1 rounded">
+                <span key={tag} className="text-[8px] md:text-[9px] font-mono text-cyber-muted bg-cyber-panel border border-cyber-border px-1.5 py-0.5 md:px-2 md:py-1 rounded">
                   {tag}
                 </span>
               ))}
@@ -893,12 +1043,12 @@ const AILiveWidget = () => {
     setShowMockup(false);
 
     const scriptSteps = [
-      "> npm install",
-      "> resolving dependencies...",
-      "> npm run build",
-      "> compiling components...",
-      "> building layout grid...",
-      "> DEPLOYMENT SUCCESSFUL."
+      "> deep-diving into client pain points...",
+      "> mapping user journeys to business goals...",
+      "> identifying high-impact growth levers...",
+      "> architecting bespoke strategic roadmaps...",
+      "> validating solution scalability & ROI...",
+      "> CLIENT-CENTRIC STRATEGY DEPLOYED."
     ];
 
     let currentStep = 0;
@@ -922,26 +1072,25 @@ const AILiveWidget = () => {
   return (
     <motion.div 
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-      className="glass-panel p-6 rounded-lg col-span-1 lg:col-span-2 h-full flex flex-col"
+      className="glass-panel p-3 md:p-6 rounded-lg col-span-1 lg:col-span-2 flex flex-col flex-1 min-h-0"
     >
-      <SectionTitle title="Deployment & Automation" icon={Zap} />
+      <SectionTitle title="Strategic Value & Impact" icon={Zap} />
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 flex-1 min-h-0">
         {/* Terminal */}
-        <div className="bg-cyber-bg border border-cyber-border rounded-lg overflow-hidden flex flex-col h-full">
-          <div className="bg-cyber-panel px-4 py-2 border-b border-cyber-border flex items-center justify-between">
-            <div className="flex space-x-2">
-              <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+        <div className="bg-cyber-bg border border-cyber-border rounded-lg overflow-hidden flex flex-col h-[220px] lg:h-auto min-h-[300px] lg:min-h-0">
+          <div className="bg-cyber-panel px-3 md:px-4 py-1.5 md:py-2 border-b border-cyber-border flex items-center justify-between shrink-0">
+            <div className="flex space-x-1.5 md:space-x-2">
+              <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-red-500/80"></div>
+              <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-yellow-500/80"></div>
+              <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-green-500/80"></div>
             </div>
-            <span className="text-[10px] font-mono text-cyber-muted">ankur@dev-machine:~</span>
+            <span className="text-[8px] md:text-[10px] font-mono text-cyber-muted truncate ml-2">ankur@client-strategy:~</span>
           </div>
-          <div className="p-4 font-mono text-xs text-cyber-muted flex-1 overflow-y-auto space-y-2">
-            <p className="text-cyber-text">Welcome to the deployment interface.</p>
-            <p>Type a command or click execute to build the dashboard.</p>
+          <div className="p-2.5 md:p-4 font-mono text-[9px] md:text-xs text-cyber-muted flex-1 overflow-y-auto space-y-1.5 md:space-y-2 custom-scrollbar">
+            <p className="text-cyber-text">Welcome to the Client-Centric Strategy Engine.</p>
             <div className="mt-4">
-              <span className="text-cyber-accent">ankur@admin:~$</span> ./build-dashboard.sh
+              <span className="text-cyber-accent">ankur@admin:~$</span> ./architect-solution.sh
             </div>
             {logs.map((log, i) => (
               <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
@@ -964,42 +1113,119 @@ const AILiveWidget = () => {
                   : 'bg-cyber-accent/10 text-cyber-accent border border-cyber-accent hover:bg-cyber-accent hover:text-cyber-bg glow-accent'
               }`}
             >
-              <Play size={14} />
-              <span>{isRunning ? 'Executing...' : 'Run Build Script'}</span>
+              <Zap size={14} />
+              <span>{isRunning ? 'Architecting...' : 'Architect Strategic Solution'}</span>
             </button>
           </div>
         </div>
 
         {/* Generated Mockup Area */}
-        <div className="bg-cyber-panel border border-cyber-border rounded-lg p-4 flex items-center justify-center h-full relative overflow-hidden">
+        <div className="bg-cyber-panel border border-cyber-border rounded-lg p-2 md:p-4 flex items-center justify-center h-[240px] lg:h-auto min-h-[300px] lg:min-h-0 relative overflow-hidden">
           {!showMockup ? (
-            <div className="text-center text-cyber-muted font-mono text-xs flex flex-col items-center">
-              <Layers size={32} className="mb-3 opacity-20" />
-              <p>AWAITING GENERATION...</p>
+            <div className="text-center text-cyber-muted font-mono text-[9px] md:text-xs flex flex-col items-center">
+              <Zap size={18} className="mb-1.5 md:mb-3 opacity-20 animate-pulse" />
+              <p className="tracking-tighter md:tracking-normal">AWAITING STRATEGIC BLUEPRINT...</p>
             </div>
           ) : (
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }} 
               animate={{ opacity: 1, scale: 1 }} 
-              className="w-full h-full bg-cyber-bg border border-cyber-accent/30 rounded p-3 flex flex-col space-y-3 relative"
+              className="w-full h-full bg-cyber-bg border border-cyber-accent/30 rounded p-1.5 md:p-4 flex flex-col space-y-1.5 md:space-y-4 relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 bg-cyber-accent text-cyber-bg text-[8px] font-mono px-2 py-0.5 rounded-bl font-bold">WIREFRAME</div>
-              {/* Header */}
-              <div className="w-full h-8 border border-dashed border-cyber-muted/40 rounded flex items-center px-2 space-x-2">
-                <div className="w-4 h-4 rounded-full bg-cyber-muted/20"></div>
-                <div className="w-24 h-2 bg-cyber-muted/20 rounded"></div>
+              <div className="absolute top-0 right-0 bg-cyber-accent text-cyber-bg text-[7px] md:text-[8px] font-mono px-1.5 md:px-2 py-0.5 rounded-bl font-bold uppercase">Client Value Roadmap</div>
+              
+              {/* Wireframe Header */}
+              <div className="w-full h-5 md:h-6 border border-cyber-accent/20 bg-cyber-accent/5 rounded flex items-center px-1.5 md:px-2 space-x-1.5 md:space-x-2">
+                <div className="w-1.5 md:w-2 h-1.5 md:h-2 rounded-full bg-cyber-accent animate-pulse"></div>
+                <div className="w-16 md:w-20 h-1 md:h-1.5 bg-cyber-accent/20 rounded"></div>
               </div>
-              {/* Content */}
-              <div className="flex-1 flex space-x-3">
-                <div className="w-1/4 h-full border border-dashed border-cyber-muted/40 rounded"></div>
-                <div className="w-3/4 h-full flex flex-col space-y-3">
-                  <div className="flex space-x-3 h-1/3">
-                    <div className="flex-1 border border-dashed border-cyber-accent/40 bg-cyber-accent/5 rounded"></div>
-                    <div className="flex-1 border border-dashed border-cyber-muted/40 rounded"></div>
-                    <div className="flex-1 border border-dashed border-cyber-muted/40 rounded"></div>
-                  </div>
-                  <div className="flex-1 border border-dashed border-cyber-muted/40 rounded"></div>
+
+              {/* Strategic Flow Wireframe */}
+              <div className="flex-1 flex flex-row items-center justify-between px-2 md:px-4 py-0 relative gap-0">
+                {/* Source System */}
+                <div className="w-12 h-12 md:w-16 md:h-16 border border-cyber-accent/30 rounded-lg flex flex-col items-center justify-center bg-cyber-panel shadow-lg p-0.5 md:p-1 z-10 relative">
+                  <MessageSquare size={12} md:size={16} className="text-cyber-accent mb-0.5 md:mb-1" />
+                  <span className="text-[6px] md:text-[7px] font-mono text-cyber-muted uppercase text-center leading-tight">CLIENT NEEDS</span>
                 </div>
+
+                {/* Connection Line with Pulse */}
+                <div className="flex-1 h-px bg-cyber-accent/20 relative mx-1 md:mx-2 z-0">
+                  <motion.div 
+                    animate={{ 
+                      left: ['-30%', '130%'],
+                      opacity: [0, 1, 1, 0]
+                    }} 
+                    className="absolute top-1/2 -translate-y-1/2 w-10 md:w-16 h-0.5 bg-gradient-to-r from-transparent via-cyber-accent to-transparent shadow-[0_0_10px_rgba(0,255,157,0.6)]"
+                    transition={{ 
+                      repeat: Infinity, 
+                      duration: 2.5, 
+                      ease: "easeInOut",
+                      times: [0, 0.1, 0.9, 1]
+                    }}
+                  ></motion.div>
+                  {/* Subtle background flow */}
+                  <div className="absolute inset-0 overflow-hidden opacity-20">
+                    <motion.div 
+                      animate={{ x: ['-100%', '100%'] }}
+                      transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+                      className="w-full h-full bg-[repeating-linear-gradient(90deg,transparent,transparent_10px,var(--color-cyber-accent)_10px,var(--color-cyber-accent)_11px)]"
+                    ></motion.div>
+                  </div>
+                </div>
+
+                {/* Strategic Logic Node */}
+                <div className="w-14 h-14 md:w-20 md:h-20 border-2 border-cyber-accent rounded-full flex flex-col items-center justify-center bg-cyber-panel relative shadow-[0_0_15px_rgba(0,255,157,0.2)] p-1 md:p-2 z-10">
+                  <div className="absolute inset-0 rounded-full border border-cyber-accent/40 animate-ping opacity-20"></div>
+                  <Zap size={14} md:size={20} className="text-cyber-accent mb-0.5 md:mb-1" />
+                  <span className="text-[6px] md:text-[7px] font-mono text-cyber-accent font-bold uppercase text-center leading-tight">STRATEGIC PLAN</span>
+                </div>
+
+                {/* Connection Line with Pulse */}
+                <div className="flex-1 h-px bg-cyber-accent/20 relative mx-1 md:mx-2 z-0">
+                  <motion.div 
+                    animate={{ 
+                      left: ['-30%', '130%'],
+                      opacity: [0, 1, 1, 0]
+                    }} 
+                    className="absolute top-1/2 -translate-y-1/2 w-10 md:w-16 h-0.5 bg-gradient-to-r from-transparent via-cyber-accent to-transparent shadow-[0_0_10px_rgba(0,255,157,0.6)]"
+                    transition={{ 
+                      repeat: Infinity, 
+                      duration: 2.5, 
+                      ease: "easeInOut",
+                      delay: 1.25,
+                      times: [0, 0.1, 0.9, 1]
+                    }}
+                  ></motion.div>
+                  {/* Subtle background flow */}
+                  <div className="absolute inset-0 overflow-hidden opacity-20">
+                    <motion.div 
+                      animate={{ x: ['-100%', '100%'] }}
+                      transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+                      className="w-full h-full bg-[repeating-linear-gradient(90deg,transparent,transparent_10px,var(--color-cyber-accent)_10px,var(--color-cyber-accent)_11px)]"
+                    ></motion.div>
+                  </div>
+                </div>
+
+                {/* Target System */}
+                <div className="w-12 h-12 md:w-16 md:h-16 border border-cyber-accent/30 rounded-lg flex flex-col items-center justify-center bg-cyber-panel shadow-lg p-0.5 md:p-1 z-10 relative">
+                  <Activity size={12} md:size={16} className="text-cyber-accent mb-0.5 md:mb-1" />
+                  <span className="text-[6px] md:text-[7px] font-mono text-cyber-muted uppercase text-center leading-tight">BUSINESS GROWTH</span>
+                </div>
+              </div>
+
+              {/* Status Bar */}
+              <div className="h-4 md:h-5 w-full bg-cyber-panel rounded border border-cyber-accent/20 flex items-center px-2 md:px-3 justify-between">
+                <div className="flex items-center space-x-1.5 md:space-x-2">
+                  <div className="w-1 md:w-1.5 h-1 md:h-1.5 rounded-full bg-green-500 shadow-[0_0_5px_rgba(34,197,94,0.5)]"></div>
+                  <span className="text-[6px] md:text-[8px] font-mono text-cyber-text uppercase tracking-tighter">Satisfaction: 100%</span>
+                </div>
+                <span className="text-[6px] md:text-[8px] font-mono text-cyber-accent font-bold uppercase tracking-tighter">Impact: Maximum</span>
+              </div>
+
+              <div className="p-1.5 md:p-2 bg-cyber-accent/5 border border-cyber-accent/20 rounded">
+                <p className="text-[6px] md:text-[8px] text-cyber-muted leading-tight italic text-center">
+                  "I don't just build features; I solve business problems. By placing the client at the center of the discovery process, I ensure every strategic plan is a direct response to a real-world need."
+                </p>
               </div>
             </motion.div>
           )}
@@ -1010,7 +1236,7 @@ const AILiveWidget = () => {
 };
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('summary');
 
   // Add custom animation keyframes to document
   useEffect(() => {
@@ -1028,10 +1254,10 @@ export default function App() {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'overview':
-        return <OverviewWidget />;
-      case 'analytics':
-        return <AnalyticsWidget />;
+      case 'summary':
+        return <SummaryWidget />;
+      case 'skills':
+        return <SkillsWidget />;
       case 'architecture':
         return <ArchitectureWidget />;
       case 'experience':
@@ -1039,7 +1265,7 @@ export default function App() {
       case 'ai-mockup':
         return <AILiveWidget />;
       default:
-        return <OverviewWidget />;
+        return <SummaryWidget />;
     }
   };
 
@@ -1047,23 +1273,25 @@ export default function App() {
     <div className="h-screen overflow-hidden bg-cyber-bg text-cyber-text flex flex-col md:flex-row font-sans selection:bg-cyber-accent selection:text-cyber-bg">
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
       
-      <main className="flex-1 flex flex-col relative overflow-hidden">
-        {/* Top Header KPIs */}
-        <header className="p-3 md:p-4 border-b border-cyber-border bg-cyber-bg/80 backdrop-blur-md z-10 shrink-0">
+      <main className="flex-1 flex flex-col relative overflow-hidden pb-16 md:pb-0">
+        {/* Top Header KPIs - Fixed at top */}
+        <header className="block p-3 md:p-4 border-b border-cyber-border bg-cyber-bg/80 backdrop-blur-md z-10 shrink-0">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            <KPICard title="Total Experience" value="3+ Yrs" icon={Briefcase} delay={0.1} />
-            <KPICard title="Projects Delivered" value="8+" icon={Layers} delay={0.2} />
-            <KPICard title="Core Focus" value="PM/BI" icon={Cpu} delay={0.3} />
-            <KPICard title="Students Trained" value="1000+" icon={Terminal} delay={0.4} />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+              <KPICard title="Core Focus" value="PM/BA/CRM" icon={Cpu} delay={0.1} />
+              <KPICard title="Total Experience" value="3+ Yrs" icon={Briefcase} delay={0.2} />
+              <KPICard title="SaaS Operated" value="15+" icon={Zap} delay={0.3} />
+              <KPICard title="Professionals Trained" value="1000+" icon={Terminal} delay={0.4} />
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
 
         {/* Main Content Area */}
-        <div className="flex-1 p-4 md:p-6 overflow-hidden">
-          <div className="w-full h-full max-w-7xl mx-auto flex flex-col">
-            {renderContent()}
+        <div className="flex-1 overflow-y-auto md:overflow-hidden custom-scrollbar flex flex-col">
+          <div className="w-full flex-1 max-w-7xl mx-auto flex flex-col p-4 md:p-6 min-h-0">
+            <div className="flex-1 flex flex-col min-h-0">
+              {renderContent()}
+            </div>
           </div>
         </div>
       </main>
