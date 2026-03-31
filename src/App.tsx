@@ -238,7 +238,7 @@ const Sidebar = ({ activeTab, setActiveTab }: {
         <div className="flex items-center space-x-4 md:space-x-0 md:flex-col">
           <div className="w-12 h-12 md:w-24 md:h-24 rounded-full bg-cyber-panel border-2 border-cyber-accent flex items-center justify-center md:mb-4 overflow-hidden relative group shrink-0">
             <div className="absolute inset-0 bg-cyber-accent/20 group-hover:bg-cyber-accent/40 transition-colors z-10"></div>
-            <img src="https://raw.githubusercontent.com/ankur-the-analyst/Webpage-Techsite-/main/Pic.jpeg" alt="Ankur Madan" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            <img src="https://raw.githubusercontent.com/ankur-the-analyst/Webpage-Techsite-/main/pic.jpeg" alt="Ankur Madan" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
           </div>
           <div>
             <h1 className="text-base md:text-lg font-bold text-cyber-text md:text-center tracking-tight">Ankur Madan</h1>
