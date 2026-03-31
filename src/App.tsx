@@ -7,7 +7,7 @@ import {
   Terminal, LayoutDashboard, BarChart2, Layers, Briefcase, 
   Linkedin, Mail, Phone, ChevronRight, Play, Cpu, Database,
   Code, Layout, Zap, Activity, MessageSquare, Link, Smartphone, Send, Columns,
-  GraduationCap, Award, FileText, ExternalLink
+  GraduationCap, Award, FileText, ExternalLink, Download, User
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -275,7 +275,7 @@ const Sidebar = ({ activeTab, setActiveTab }: {
   return (
     <>
       {/* Desktop Sidebar / Mobile Top Header */}
-      <div className="w-full md:w-64 glass-panel border-b md:border-b-0 md:border-r border-cyber-border flex flex-col shrink-0 z-20 sticky top-0 md:h-screen bg-cyber-bg/80 backdrop-blur-md md:bg-transparent md:backdrop-blur-none">
+      <div className="w-full md:w-64 glass-panel border-b md:border-b-0 md:border-r border-cyber-border flex flex-col shrink-0 z-20 sticky top-0 md:h-screen bg-cyber-bg/80 backdrop-blur-md md:bg-transparent md:backdrop-blur-none md:overflow-y-auto custom-scrollbar">
         <div className="p-4 md:p-5 border-b border-cyber-border flex flex-row md:flex-col items-center md:items-center justify-between md:justify-start shrink-0">
           <div className="flex items-center space-x-4 md:space-x-0 md:flex-col">
             <div className="w-12 h-12 md:w-24 md:h-24 rounded-full bg-cyber-panel border-2 border-cyber-accent flex items-center justify-center md:mb-4 overflow-hidden relative group shrink-0">
@@ -292,8 +292,8 @@ const Sidebar = ({ activeTab, setActiveTab }: {
           </div>
         </div>
 
-        {/* Scrollable Area for Nav and Footer */}
-        <div className="hidden md:flex flex-col flex-1 overflow-y-auto custom-scrollbar min-h-0">
+        {/* Nav and Footer Area */}
+        <div className="hidden md:flex flex-col flex-1 min-h-0">
           {/* Desktop Navigation */}
           <div className="flex-1 py-4 md:py-6">
             <nav className="flex flex-col space-y-1 px-3 w-full">
@@ -328,25 +328,34 @@ const Sidebar = ({ activeTab, setActiveTab }: {
               <Linkedin size={14} className="shrink-0" />
               <span className="truncate text-ellipsis overflow-hidden">linkedin.com/in/ankur-madan</span>
             </a>
+            <a 
+              href="https://drive.google.com/file/d/1uRKq0ZBmFvonrYHmF61wBY1swb--UVEE/view?usp=drive_link" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center space-x-3 text-cyber-muted hover:text-cyber-accent transition-colors text-xs font-mono"
+            >
+              <Download size={14} className="shrink-0" />
+              <span className="truncate text-ellipsis overflow-hidden">Download Resume</span>
+            </a>
           </div>
         </div>
       </div>
 
       {/* Mobile Bottom Navigation */}
-      <div className="md:hidden fixed bottom-0 left-0 w-full glass-panel border-t border-cyber-border z-30 px-2 py-1 bg-cyber-bg/90 backdrop-blur-lg">
+      <div className="md:hidden fixed bottom-0 left-0 w-full glass-panel border-t border-cyber-border z-30 px-1 py-1 bg-cyber-bg/90 backdrop-blur-lg">
         <nav className="flex justify-around items-center h-16">
-          {navItems.map((item) => (
+          {[...navItems, { id: 'profile', label: 'Contact', icon: User }].map((item) => (
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`flex flex-col items-center justify-center space-y-1 px-2 py-1 rounded-md transition-all duration-200 ${
+              className={`flex flex-col items-center justify-center space-y-1 px-1 py-1 rounded-md transition-all duration-200 ${
                 activeTab === item.id 
                   ? 'text-cyber-accent' 
                   : 'text-cyber-muted'
               }`}
             >
-              <item.icon size={20} className={activeTab === item.id ? 'text-cyber-accent' : ''} />
-              <span className="text-[9px] font-medium uppercase tracking-tighter text-center leading-none">
+              <item.icon size={18} className={activeTab === item.id ? 'text-cyber-accent' : ''} />
+              <span className="text-[8px] font-medium uppercase tracking-tighter text-center leading-none">
                 {item.id === 'architecture' ? 'Portfolio' : item.id === 'ai-mockup' ? 'Impact' : item.label}
               </span>
             </button>
@@ -381,13 +390,50 @@ const SectionTitle = ({ title, icon: Icon }: { title: string, icon: any }) => (
   </div>
 );
 
+const ProfileWidget = () => (
+  <motion.div 
+    initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
+    className="flex-1 flex items-center justify-center p-4"
+  >
+    <div className="glass-panel p-6 rounded-xl flex flex-col w-full max-w-sm">
+      <SectionTitle title="Contact & Resume" icon={User} />
+      <div className="space-y-4 text-[13px] md:text-sm leading-relaxed text-cyber-muted pr-2">
+        <a href="mailto:talkwithankurmadan@gmail.com" className="flex items-center space-x-3 text-cyber-muted hover:text-cyber-accent transition-colors text-xs font-mono">
+          <Mail size={16} className="shrink-0" />
+          <span className="truncate text-ellipsis overflow-hidden">talkwithankurmadan@gmail.com</span>
+        </a>
+        <a href="tel:+919711445542" className="flex items-center space-x-3 text-cyber-muted hover:text-cyber-accent transition-colors text-xs font-mono">
+          <Phone size={16} className="shrink-0" />
+          <span>+91-9711445542</span>
+        </a>
+        <a href="https://linkedin.com/in/ankur-madan" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-cyber-muted hover:text-cyber-accent transition-colors text-xs font-mono">
+          <Linkedin size={16} className="shrink-0" />
+          <span className="truncate text-ellipsis overflow-hidden">linkedin.com/in/ankur-madan</span>
+        </a>
+        
+        <div className="pt-4 border-t border-cyber-border mt-4">
+          <a 
+            href="https://drive.google.com/file/d/1uRKq0ZBmFvonrYHmF61wBY1swb--UVEE/view?usp=drive_link" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="w-full py-3 rounded font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 bg-cyber-accent/10 text-cyber-accent border border-cyber-accent hover:bg-cyber-accent hover:text-cyber-bg glow-accent"
+          >
+            <Download size={16} />
+            <span>Download Resume</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+);
+
 const SummaryWidget = () => (
   <motion.div 
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-    className="col-span-1 lg:col-span-2 flex flex-col gap-4 md:gap-6 flex-1 min-h-0"
+    className="col-span-1 lg:col-span-2 flex flex-col gap-4 md:gap-6 md:flex-1 md:min-h-0"
   >
     {/* Summary Box */}
-    <div className="glass-panel p-4 md:p-6 rounded-xl flex flex-col flex-1 min-h-0">
+    <div className="glass-panel p-4 md:p-6 rounded-xl flex flex-col md:flex-1 md:min-h-0">
       <SectionTitle title="Professional Summary" icon={Activity} />
       <div className="space-y-3 md:space-y-4 text-[13px] md:text-sm leading-relaxed text-cyber-muted pr-2 overflow-y-auto custom-scrollbar">
         <div className="flex items-start gap-2">
@@ -523,7 +569,7 @@ const SkillsWidget = () => {
   }, [step]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:flex-1 md:min-h-0">
     <div className="glass-panel p-4 md:p-6 rounded-lg flex flex-col min-h-[350px] lg:h-auto lg:min-h-0">
       <SectionTitle title="Core Competencies" icon={PieChart} />
       <div className="flex-1 w-full relative mt-4 min-h-[250px] lg:min-h-0">
@@ -715,7 +761,7 @@ const ExperienceWidget = () => {
   return (
     <motion.div 
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-      className="glass-panel p-2.5 md:p-6 rounded-lg col-span-1 lg:col-span-2 flex flex-col flex-1 min-h-0"
+      className="glass-panel p-2.5 md:p-6 rounded-lg col-span-1 lg:col-span-2 flex flex-col md:flex-1 md:min-h-0"
     >
       <SectionTitle title="Project Tracker" icon={Layout} />
       
@@ -785,34 +831,56 @@ const ExperienceWidget = () => {
                 </div>
 
                 {/* Timeline */}
-                <div className="w-full md:col-span-4 relative h-4 md:h-6 bg-cyber-bg rounded border border-cyber-border overflow-hidden flex items-center">
-                  {/* Grid lines for years */}
-                  <div className="absolute inset-0 flex pointer-events-none opacity-20">
-                    {Array.from({ length: totalYears }).map((_, i) => (
-                      <div key={i} className="flex-1 border-r border-cyber-muted h-full"></div>
-                    ))}
+                <div className="w-full md:col-span-4 relative h-4 md:h-6 flex items-center group/timeline cursor-help">
+                  {/* Inner container for clipping */}
+                  <div className="absolute inset-0 bg-cyber-bg rounded border border-cyber-border overflow-hidden">
+                    {/* Grid lines for years */}
+                    <div className="absolute inset-0 flex pointer-events-none opacity-20">
+                      {Array.from({ length: totalYears }).map((_, i) => (
+                        <div key={i} className="flex-1 border-r border-cyber-muted h-full"></div>
+                      ))}
+                    </div>
+                    
+                    {/* Timeline Bar */}
+                    <div 
+                      className={`absolute h-2.5 md:h-4 rounded-sm top-1/2 -translate-y-1/2 ${
+                        exp.status === 'Active Sprint' ? 'bg-green-500' : exp.status === 'Deployed' ? 'bg-cyber-accent' : 'bg-cyber-muted'
+                      } opacity-80 group-hover/timeline:opacity-100 transition-opacity`}
+                      style={{ 
+                        left: `${startOffset}%`, 
+                        width: `${Math.max(width, 1)}%`
+                      }}
+                    >
+                      <div 
+                        className="h-full bg-white/20"
+                        style={{ width: `${exp.progress}%` }}
+                      ></div>
+                    </div>
+                    
+                    {/* Static Year labels */}
+                    <div className="absolute inset-0 flex items-center justify-between px-2 pointer-events-none">
+                      <span className="text-[7px] md:text-[9px] font-mono text-cyber-muted/50">{exp.startMonth}, {exp.startYear}</span>
+                      <span className="text-[7px] md:text-[9px] font-mono text-cyber-muted/50">{exp.endMonth === 'Present' ? 'Present' : `${exp.endMonth}, ${exp.endYear}`}</span>
+                    </div>
                   </div>
-                  
-                  {/* Timeline Bar */}
+
+                  {/* Custom Tooltip Anchor (Outside overflow-hidden) */}
                   <div 
-                    className={`absolute h-2.5 md:h-4 rounded-sm ${
-                      exp.status === 'Active Sprint' ? 'bg-green-500' : exp.status === 'Deployed' ? 'bg-cyber-accent' : 'bg-cyber-muted'
-                    } opacity-80 group-hover:opacity-100 transition-opacity`}
+                    className="absolute h-full top-0 hidden group-hover/timeline:block z-50 pointer-events-none"
                     style={{ 
                       left: `${startOffset}%`, 
                       width: `${Math.max(width, 1)}%`
                     }}
                   >
-                    <div 
-                      className="h-full bg-white/20"
-                      style={{ width: `${exp.progress}%` }}
-                    ></div>
-                  </div>
-                  
-                  {/* Static Year labels */}
-                  <div className="absolute inset-0 flex items-center justify-between px-2 pointer-events-none">
-                    <span className="text-[7px] md:text-[9px] font-mono text-cyber-muted/50">{exp.startMonth}, {exp.startYear}</span>
-                    <span className="text-[7px] md:text-[9px] font-mono text-cyber-muted/50">{exp.endMonth === 'Present' ? 'Present' : `${exp.endMonth}, ${exp.endYear}`}</span>
+                    <div className={`absolute bottom-full mb-1 ${
+                      (startOffset + (width / 2)) > 80 ? 'right-0' : 
+                      (startOffset + (width / 2)) < 20 ? 'left-0' : 
+                      'left-1/2 -translate-x-1/2'
+                    }`}>
+                      <div className="bg-cyber-bg border border-cyber-border text-cyber-text text-[10px] font-mono px-2 py-1 rounded shadow-lg whitespace-nowrap">
+                        Duration: {getDuration(exp.startMonth, exp.startYear, exp.endMonth, exp.endYear)}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -970,7 +1038,7 @@ const renderGraphic = (type: string) => {
 const ArchitectureWidget = () => (
   <motion.div 
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-    className="col-span-1 lg:col-span-2 flex flex-col flex-1 min-h-0"
+    className="col-span-1 lg:col-span-2 flex flex-col md:flex-1 md:min-h-0"
   >
     <SectionTitle title="Portfolio Architecture" icon={Zap} />
     <div className="flex-1 pr-2 overflow-y-auto custom-scrollbar pb-4">
@@ -1072,13 +1140,13 @@ const AILiveWidget = () => {
   return (
     <motion.div 
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-      className="glass-panel p-3 md:p-6 rounded-lg col-span-1 lg:col-span-2 flex flex-col flex-1 min-h-0"
+      className="glass-panel p-3 md:p-6 rounded-lg col-span-1 lg:col-span-2 flex flex-col md:flex-1 md:min-h-0"
     >
       <SectionTitle title="Strategic Value & Impact" icon={Zap} />
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 flex-1 min-h-0">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 md:flex-1 md:min-h-0">
         {/* Terminal */}
-        <div className="bg-cyber-bg border border-cyber-border rounded-lg overflow-hidden flex flex-col h-[220px] lg:h-auto min-h-[300px] lg:min-h-0">
+        <div className="bg-cyber-bg border border-cyber-border rounded-lg overflow-hidden flex flex-col h-[350px] md:h-auto md:min-h-[300px] lg:min-h-0">
           <div className="bg-cyber-panel px-3 md:px-4 py-1.5 md:py-2 border-b border-cyber-border flex items-center justify-between shrink-0">
             <div className="flex space-x-1.5 md:space-x-2">
               <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-red-500/80"></div>
@@ -1120,7 +1188,7 @@ const AILiveWidget = () => {
         </div>
 
         {/* Generated Mockup Area */}
-        <div className="bg-cyber-panel border border-cyber-border rounded-lg p-2 md:p-4 flex items-center justify-center h-[240px] lg:h-auto min-h-[300px] lg:min-h-0 relative overflow-hidden">
+        <div className="bg-cyber-panel border border-cyber-border rounded-lg p-2 md:p-4 flex items-center justify-center h-[350px] md:h-auto md:min-h-[300px] lg:min-h-0 relative overflow-hidden">
           {!showMockup ? (
             <div className="text-center text-cyber-muted font-mono text-[9px] md:text-xs flex flex-col items-center">
               <Zap size={18} className="mb-1.5 md:mb-3 opacity-20 animate-pulse" />
@@ -1264,6 +1332,8 @@ export default function App() {
         return <ExperienceWidget />;
       case 'ai-mockup':
         return <AILiveWidget />;
+      case 'profile':
+        return <ProfileWidget />;
       default:
         return <SummaryWidget />;
     }
@@ -1288,8 +1358,8 @@ export default function App() {
 
         {/* Main Content Area */}
         <div className="flex-1 overflow-y-auto md:overflow-hidden custom-scrollbar flex flex-col">
-          <div className="w-full flex-1 max-w-7xl mx-auto flex flex-col p-4 md:p-6 min-h-0">
-            <div className="flex-1 flex flex-col min-h-0">
+          <div className="w-full flex-1 max-w-7xl mx-auto flex flex-col p-4 md:p-6 md:min-h-0">
+            <div className="flex-1 flex flex-col md:min-h-0">
               {renderContent()}
             </div>
           </div>
