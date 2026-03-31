@@ -1,17 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
+:root {
+  --cyber-bg: #f5f5f5;
+  --cyber-panel: #ffffff;
+  --cyber-border: #e0e0e0;
+  --cyber-accent: #000000;
+  --cyber-accent-hover: #333333;
+  --cyber-text: #1a1a1a;
+  --cyber-muted: #666666;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glow-color: rgba(0, 0, 0, 0.1);
+}
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   
-  --color-cyber-bg: #111111;
-  --color-cyber-panel: #1a1a1a;
-  --color-cyber-border: #2e2e2e;
-  --color-cyber-accent: #ffffff;
-  --color-cyber-accent-hover: #e5e5e5;
-  --color-cyber-text: #ededed;
-  --color-cyber-muted: #888888;
+  --color-cyber-bg: var(--cyber-bg);
+  --color-cyber-panel: var(--cyber-panel);
+  --color-cyber-border: var(--cyber-border);
+  --color-cyber-accent: var(--cyber-accent);
+  --color-cyber-accent-hover: var(--cyber-accent-hover);
+  --color-cyber-text: var(--cyber-text);
+  --color-cyber-muted: var(--cyber-muted);
 }
 
 body {
@@ -36,14 +48,15 @@ body {
 }
 
 .glass-panel {
-  background: rgba(26, 26, 26, 0.6);
+  background: var(--glass-bg);
   backdrop-filter: blur(12px);
   border: 1px solid var(--color-cyber-border);
+  transition: background 0.3s ease, border 0.3s ease;
 }
 
 .glow-accent {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px var(--glow-color);
 }
 .glow-accent:hover {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 25px var(--glow-color);
 }

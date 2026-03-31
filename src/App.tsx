@@ -50,8 +50,9 @@ const TreemapCustomContent = (props: any) => {
         width={width}
         height={height}
         style={{
-          fill: COLORS[index % COLORS.length],
-          stroke: '#141414',
+          fill: `var(--color-cyber-accent)`,
+          fillOpacity: 0.1 + (index / 10),
+          stroke: 'var(--color-cyber-bg)',
           strokeWidth: 2,
         }}
       />
@@ -70,7 +71,7 @@ const TreemapCustomContent = (props: any) => {
           >
             <span 
               style={{ 
-                color: index < 3 ? '#141414' : '#ffffff',
+                color: 'var(--color-cyber-text)',
                 fontSize: width > 70 ? '10px' : '8px',
                 fontFamily: 'var(--font-mono)',
                 textAlign: 'center',
@@ -219,7 +220,10 @@ const projectsData = [
 
 // --- Components ---
 
-const Sidebar = ({ activeTab, setActiveTab }: { activeTab: string, setActiveTab: (t: string) => void }) => {
+const Sidebar = ({ activeTab, setActiveTab }: { 
+  activeTab: string, 
+  setActiveTab: (t: string) => void
+}) => {
   const navItems = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
     { id: 'analytics', label: 'Analytics & Skills', icon: BarChart2 },
@@ -234,7 +238,7 @@ const Sidebar = ({ activeTab, setActiveTab }: { activeTab: string, setActiveTab:
         <div className="flex items-center space-x-4 md:space-x-0 md:flex-col">
           <div className="w-12 h-12 md:w-24 md:h-24 rounded-full bg-cyber-panel border-2 border-cyber-accent flex items-center justify-center md:mb-4 overflow-hidden relative group shrink-0">
             <div className="absolute inset-0 bg-cyber-accent/20 group-hover:bg-cyber-accent/40 transition-colors z-10"></div>
-            <img src="https://raw.githubusercontent.com/ankur-the-analyst/Webpage-Techsite--main/master/Pic.jpeg" alt="Ankur Madan" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+            <img src="https://raw.githubusercontent.com/ankur-the-analyst/Webpage-Techsite-/main/Pic.jpeg" alt="Ankur Madan" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
           </div>
           <div>
             <h1 className="text-base md:text-lg font-bold text-cyber-text md:text-center tracking-tight">Ankur Madan</h1>
@@ -567,7 +571,7 @@ const AnalyticsWidget = () => {
             data={coreCompetenciesData}
             dataKey="size"
             aspectRatio={4 / 3}
-            stroke="#141414"
+            stroke="var(--color-cyber-bg)"
             content={<TreemapCustomContent />}
             isAnimationActive={false}
           >
@@ -783,28 +787,28 @@ const renderGraphic = (type: string) => {
       );
     case 'mobile':
       return (
-        <div className="w-12 h-24 border-2 border-[#1a1a1a] rounded-xl flex flex-col items-center p-1 gap-1">
-          <div className="w-4 h-0.5 bg-[#2a2a2a] rounded-full mt-1"></div>
-          <div className="w-full flex-1 bg-[#1a1a1a] rounded-sm mt-1 flex items-center justify-center">
-            <div className="w-6 h-8 border border-[#2a2a2a] rounded-sm"></div>
+        <div className="w-12 h-24 border-2 border-cyber-border rounded-xl flex flex-col items-center p-1 gap-1">
+          <div className="w-4 h-0.5 bg-cyber-border rounded-full mt-1"></div>
+          <div className="w-full flex-1 bg-cyber-panel rounded-sm mt-1 flex items-center justify-center">
+            <div className="w-6 h-8 border border-cyber-border rounded-sm"></div>
           </div>
         </div>
       );
     case 'flowchart':
       return (
         <div className="flex flex-col items-center gap-2">
-          <div className="w-12 h-6 bg-[#1a1a1a] border border-[#2a2a2a] rounded-sm"></div>
+          <div className="w-12 h-6 bg-cyber-panel border border-cyber-border rounded-sm"></div>
           <div className="flex flex-col items-center">
-            <div className="w-0.5 h-3 bg-[#1a1a1a]"></div>
-            <div className="w-16 h-0.5 bg-[#1a1a1a]"></div>
+            <div className="w-0.5 h-3 bg-cyber-border"></div>
+            <div className="w-16 h-0.5 bg-cyber-border"></div>
             <div className="flex justify-between w-16">
-              <div className="w-0.5 h-3 bg-[#1a1a1a]"></div>
-              <div className="w-0.5 h-3 bg-[#1a1a1a]"></div>
+              <div className="w-0.5 h-3 bg-cyber-border"></div>
+              <div className="w-0.5 h-3 bg-cyber-border"></div>
             </div>
           </div>
           <div className="flex gap-4">
-            <div className="w-10 h-6 bg-[#1a1a1a] border border-[#2a2a2a] rounded-sm"></div>
-            <div className="w-10 h-6 bg-[#1a1a1a] border border-[#2a2a2a] rounded-sm"></div>
+            <div className="w-10 h-6 bg-cyber-panel border border-cyber-border rounded-sm"></div>
+            <div className="w-10 h-6 bg-cyber-panel border border-cyber-border rounded-sm"></div>
           </div>
         </div>
       );
@@ -826,23 +830,23 @@ const ArchitectureWidget = () => (
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: idx * 0.1 }}
-          className="bg-[#141414] rounded-xl border border-[#262626] p-4 flex flex-col gap-4 hover:border-cyber-muted transition-colors min-h-[220px]"
+          className="bg-cyber-panel rounded-xl border border-cyber-border p-4 flex flex-col gap-4 hover:border-cyber-muted transition-colors min-h-[220px]"
         >
           {/* Header */}
           <div className="flex items-center space-x-2">
             <project.icon size={16} className="text-blue-400" />
-            <h3 className="text-sm font-semibold text-gray-200">{project.name}</h3>
+            <h3 className="text-sm font-semibold text-cyber-text">{project.name}</h3>
           </div>
           
           {/* Graphic Area */}
-          <div className="h-32 bg-[#0a0a0a] rounded-lg border border-[#1a1a1a] p-3 flex items-center justify-center relative overflow-hidden">
+          <div className="h-32 bg-cyber-bg rounded-lg border border-cyber-border p-3 flex items-center justify-center relative overflow-hidden">
              {renderGraphic(project.graphicType)}
           </div>
           
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mt-auto">
             {project.tags.map(tag => (
-              <span key={tag} className="text-[9px] font-mono text-gray-400 bg-[#1a1a1a] border border-[#262626] px-2 py-1 rounded">
+              <span key={tag} className="text-[9px] font-mono text-cyber-muted bg-cyber-panel border border-cyber-border px-2 py-1 rounded">
                 {tag}
               </span>
             ))}
