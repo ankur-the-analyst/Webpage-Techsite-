@@ -432,12 +432,12 @@ const ProfileWidget = () => (
 const SummaryWidget = () => (
   <motion.div 
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-    className="col-span-1 lg:col-span-2 flex flex-col gap-4 lg:gap-6 lg:flex-1 lg:min-h-0"
+    className="col-span-1 lg:col-span-2 flex flex-col gap-4 lg:gap-6 md:flex-1 md:min-h-0"
   >
     {/* Summary Box */}
-    <div className="glass-panel p-4 lg:p-6 rounded-xl flex flex-col lg:flex-1 lg:min-h-0">
+    <div className="glass-panel p-4 lg:p-6 rounded-xl flex flex-col md:flex-1 md:min-h-0">
       <SectionTitle title="Professional Summary" icon={Activity} />
-      <div className="space-y-3 md:space-y-4 text-[13px] md:text-sm leading-relaxed text-cyber-muted pr-2 overflow-y-auto scrollbar-hide">
+      <div className="space-y-3 md:space-y-6 text-[13px] md:text-base leading-relaxed text-cyber-muted pr-2 overflow-y-auto scrollbar-hide">
         <div className="flex items-start gap-2">
           <span className="text-cyber-accent font-mono mt-0.5 shrink-0">{'>'}</span> 
           <p>Versatile Product Manager and Business Analysis professional with over 3 years of collective experience driving product lifecycles, optimizing processes, and leading cross-functional teams.</p>
@@ -459,27 +459,27 @@ const SummaryWidget = () => (
       <div className="glass-panel p-4 md:p-5 rounded-xl flex flex-col min-h-0">
         <SectionTitle title="Education" icon={GraduationCap} />
         <div className="flex-1 pr-2 overflow-y-auto scrollbar-hide">
-          <ul className="space-y-2 text-xs text-cyber-text">
+          <ul className="space-y-2 md:space-y-4 text-xs text-cyber-text">
             <li className="flex flex-col">
               <div className="flex justify-between items-start">
-                <span className="font-bold text-xs md:text-sm">MBA in Business Analytics</span>
-                <span className="font-mono text-cyber-muted text-[9px] md:text-[10px] shrink-0 ml-2">CGPA: 8.21</span>
+                <span className="font-bold text-xs md:text-base">MBA in Business Analytics</span>
+                <span className="font-mono text-cyber-muted text-[9px] md:text-xs shrink-0 ml-2">CGPA: 8.21</span>
               </div>
-              <span className="text-[10px] md:text-[11px] text-cyber-muted mt-0.5">Dr. APJ Abdul Kalam Tech. Univ.</span>
+              <span className="text-[10px] md:text-sm text-cyber-muted mt-0.5">Dr. APJ Abdul Kalam Tech. Univ.</span>
             </li>
             <li className="flex flex-col">
               <div className="flex justify-between items-start">
-                <span className="font-bold text-xs md:text-sm">Bachelor of Commerce</span>
-                <span className="font-mono text-cyber-muted text-[9px] md:text-[10px] shrink-0 ml-2">CGPA: 8.33</span>
+                <span className="font-bold text-xs md:text-base">Bachelor of Commerce</span>
+                <span className="font-mono text-cyber-muted text-[9px] md:text-xs shrink-0 ml-2">CGPA: 8.33</span>
               </div>
-              <span className="text-[10px] md:text-[11px] text-cyber-muted mt-0.5">University of Delhi</span>
+              <span className="text-[10px] md:text-sm text-cyber-muted mt-0.5">University of Delhi</span>
             </li>
             <li className="flex flex-col">
               <div className="flex justify-between items-start">
-                <span className="font-bold text-xs md:text-sm">Class XII</span>
-                <span className="font-mono text-cyber-muted text-[9px] md:text-[10px] shrink-0 ml-2">84.6%</span>
+                <span className="font-bold text-xs md:text-base">Class XII</span>
+                <span className="font-mono text-cyber-muted text-[9px] md:text-xs shrink-0 ml-2">84.6%</span>
               </div>
-              <span className="text-[10px] md:text-[11px] text-cyber-muted mt-0.5">CBSE Board</span>
+              <span className="text-[10px] md:text-sm text-cyber-muted mt-0.5">CBSE Board</span>
             </li>
           </ul>
         </div>
@@ -489,7 +489,7 @@ const SummaryWidget = () => (
       <div className="glass-panel p-4 md:p-5 rounded-xl flex flex-col min-h-0">
         <SectionTitle title="Certifications" icon={Award} />
         <div className="flex-1 pr-2 overflow-y-auto scrollbar-hide">
-          <ul className="text-[10px] md:text-[11px] text-cyber-text flex flex-wrap gap-2">
+          <ul className="text-[10px] md:text-xs text-cyber-text flex flex-wrap gap-2 md:gap-3">
             {[
               'Atlassian Agile Project Management Professional Certificate (Atlassian)', 
               'Aha! Product Management Professional Certificate (Aha!)', 
@@ -571,10 +571,10 @@ const SkillsWidget = () => {
   }, [step]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:flex-1 lg:min-h-0">
-    <div className="glass-panel p-4 lg:p-6 rounded-lg flex flex-col min-h-[350px] lg:h-auto lg:min-h-0 order-2 lg:order-1">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:flex-1 md:min-h-0">
+    <div className="glass-panel p-4 lg:p-6 rounded-lg flex flex-col min-h-[350px] md:h-auto md:min-h-0 order-2 lg:order-1">
       <SectionTitle title="Core Competencies" icon={PieChart} />
-      <div className="flex-1 w-full relative mt-4 min-h-[250px] lg:min-h-0">
+      <div className="flex-1 w-full relative mt-4 min-h-[250px] md:min-h-0">
         <ResponsiveContainer width="100%" height="100%">
           <Treemap
             data={coreCompetenciesData}
@@ -594,7 +594,7 @@ const SkillsWidget = () => {
 
       <motion.div 
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-        className="flex flex-col glass-panel rounded-lg overflow-hidden relative min-h-[400px] lg:h-auto lg:min-h-0 order-1 lg:order-2"
+        className="flex flex-col glass-panel rounded-lg overflow-hidden relative min-h-[400px] md:h-auto md:min-h-0 order-1 lg:order-2"
       >
         {/* Chat Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-cyber-border bg-cyber-panel/40 backdrop-blur-sm z-10 shrink-0">
@@ -761,7 +761,7 @@ const ExperienceWidget = () => {
   return (
     <motion.div 
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-      className="glass-panel p-2.5 md:p-6 rounded-lg col-span-1 lg:col-span-2 flex flex-col md:flex-1 md:min-h-0"
+      className="glass-panel p-2.5 md:p-4 lg:p-6 rounded-lg col-span-1 lg:col-span-2 flex flex-col md:flex-1 md:min-h-0"
     >
       <SectionTitle title="Experience Tracker" icon={Layout} />
       
@@ -772,18 +772,18 @@ const ExperienceWidget = () => {
         ))}
       </div>
 
-      <div className="flex-1 overflow-x-auto overflow-y-auto mt-1 md:mt-4 pr-1 md:pr-2 scrollbar-hide">
-        <div className="min-w-full md:min-w-[800px]">
+      <div className="flex-1 overflow-x-auto lg:overflow-x-visible overflow-y-auto mt-1 md:mt-4 pr-1 md:pr-2 scrollbar-hide">
+        <div className="min-w-full lg:min-w-[800px]">
           {/* Header for Desktop */}
-        <div className="hidden md:grid sticky top-0 z-10 bg-cyber-panel/95 backdrop-blur-sm grid-cols-12 gap-4 border-b border-cyber-border pb-3 mb-4 pt-1 text-xs font-mono text-cyber-muted uppercase tracking-wider">
-          <div className="col-span-3">Organization</div>
-          <div className="col-span-3">Role & Focus</div>
-          <div className="col-span-2">Status</div>
-          <div className="col-span-4 flex flex-col">
+        <div className="hidden md:grid sticky top-0 z-10 bg-cyber-panel/95 backdrop-blur-sm grid-cols-12 gap-2 lg:gap-4 border-b border-cyber-border pb-3 mb-4 pt-1 text-[10px] lg:text-xs font-mono text-cyber-muted uppercase tracking-wider">
+          <div className="col-span-4 lg:col-span-3">Organization</div>
+          <div className="col-span-3 lg:col-span-3">Role & Focus</div>
+          <div className="col-span-2 lg:col-span-2">Status</div>
+          <div className="col-span-3 lg:col-span-4 flex flex-col">
             <div className="flex justify-between w-full mb-1">
               <span>Timeline</span>
             </div>
-            <div className="flex justify-between w-full text-[9px] text-cyber-muted/50">
+            <div className="flex justify-between w-full text-[8px] lg:text-[9px] text-cyber-muted/50">
               {Array.from({ length: totalYears + 1 }).map((_, i) => (
                 <span key={i}>{minYear + i}</span>
               ))}
@@ -806,26 +806,26 @@ const ExperienceWidget = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                className="flex flex-col md:grid md:grid-cols-12 gap-1.5 md:gap-4 items-start md:items-center bg-cyber-panel/30 p-2 md:p-3 rounded border border-cyber-border hover:border-cyber-accent/50 transition-colors group"
+                className="flex flex-col md:grid md:grid-cols-12 gap-1.5 md:gap-2 lg:gap-4 items-start md:items-center bg-cyber-panel/30 p-2 md:p-3 rounded border border-cyber-border hover:border-cyber-accent/50 transition-colors group"
               >
                 {/* Organization */}
-                <div className="w-full md:col-span-3 pr-2">
-                  <h4 className="text-[11px] md:text-sm font-bold text-cyber-text group-hover:text-cyber-accent transition-colors truncate">{exp.company}</h4>
-                  <p className="text-[8px] md:text-[10px] font-mono text-cyber-muted mt-0.5 md:mt-1">
+                <div className="w-full md:col-span-4 lg:col-span-3 pr-2">
+                  <h4 className="text-[11px] md:text-xs lg:text-sm font-bold text-cyber-text group-hover:text-cyber-accent transition-colors truncate">{exp.company}</h4>
+                  <p className="text-[8px] md:text-[9px] lg:text-[10px] font-mono text-cyber-muted mt-0.5 md:mt-1">
                     {exp.startMonth}, {exp.startYear} - {exp.endMonth === 'Present' ? 'Present' : `${exp.endMonth}, ${exp.endYear}`}
                     <span className="text-cyber-muted/50 ml-1">({getDuration(exp.startMonth, exp.startYear, exp.endMonth, exp.endYear)})</span>
                   </p>
                 </div>
 
                 {/* Role & Focus */}
-                <div className="w-full md:col-span-3 pr-2">
-                  <p className="text-[10px] md:text-xs text-cyber-text truncate">{exp.role}</p>
-                  <p className="text-[8px] md:text-[10px] font-mono text-cyber-muted truncate mt-0.5">{exp.focus}</p>
+                <div className="w-full md:col-span-3 lg:col-span-3 pr-2">
+                  <p className="text-[10px] md:text-[11px] lg:text-xs text-cyber-text truncate">{exp.role}</p>
+                  <p className="text-[8px] md:text-[9px] lg:text-[10px] font-mono text-cyber-muted truncate mt-0.5">{exp.focus}</p>
                 </div>
 
                 {/* Status */}
-                <div className="w-full md:col-span-2">
-                  <span className={`inline-flex items-center px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[8px] md:text-[10px] font-mono border ${
+                <div className="w-full md:col-span-2 lg:col-span-2">
+                  <span className={`inline-flex items-center px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[8px] md:text-[9px] lg:text-[10px] font-mono border ${
                     exp.status === 'Active Sprint' 
                       ? 'bg-green-500/10 text-green-600 border-green-500/30' 
                       : exp.status === 'Deployed'
@@ -838,7 +838,7 @@ const ExperienceWidget = () => {
                 </div>
 
                 {/* Timeline */}
-                <div className="w-full md:col-span-4 relative h-4 md:h-6 flex items-center group/timeline cursor-help">
+                <div className="w-full md:col-span-3 lg:col-span-4 relative h-4 md:h-6 flex items-center group/timeline cursor-help">
                   {/* Inner container for clipping */}
                   <div className="absolute inset-0 bg-cyber-bg rounded border border-cyber-border overflow-hidden">
                     {/* Grid lines for years */}
@@ -1369,15 +1369,15 @@ export default function App() {
               <KPICard title="Core Focus" value="PM/BA/CRM" icon={Cpu} delay={0.1} />
               <KPICard title="Total Experience" value="3+ Yrs" icon={Briefcase} delay={0.2} />
               <KPICard title="SaaS Operated" value="15+" icon={Zap} delay={0.3} />
-              <KPICard title="Professionals Trained" value="1000+" icon={Terminal} delay={0.4} />
+              <KPICard title="Professionals Trained" value="1K+" icon={Terminal} delay={0.4} />
             </div>
           </div>
         </header>
 
         {/* Main Content Area */}
         <div ref={scrollContainerRef} className="flex-1 overflow-y-auto lg:overflow-hidden scrollbar-hide flex flex-col">
-          <div className="w-full flex-1 max-w-7xl mx-auto flex flex-col items-center p-4 lg:p-6 lg:min-h-0">
-            <div className="w-full flex-1 flex flex-col lg:min-h-0">
+          <div className="w-full flex-1 max-w-7xl mx-auto flex flex-col items-center p-4 lg:p-6 md:min-h-0">
+            <div className="w-full flex-1 flex flex-col md:min-h-0">
               {renderContent()}
             </div>
           </div>
