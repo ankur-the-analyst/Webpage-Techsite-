@@ -535,21 +535,38 @@ const SkillsWidget = () => {
       const timer = setTimeout(() => setStep(1), 1000);
       return () => clearTimeout(timer);
     } else if (step === 1) {
-      const timer = setTimeout(() => {
-        setUserText(userMessage);
-        setInputText('');
-        setStep(2);
-      }, 1500);
-      return () => clearTimeout(timer);
+      const words = userMessage.split(' ');
+      let wordIndex = 0;
+      const interval = setInterval(() => {
+        const currentText = words.slice(0, wordIndex + 1).join(' ');
+        setInputText(currentText);
+        wordIndex++;
+        if (wordIndex >= words.length) {
+          clearInterval(interval);
+          setTimeout(() => {
+            setUserText(userMessage);
+            setInputText('');
+            setStep(2);
+          }, 1000);
+        }
+      }, 200);
+      return () => clearInterval(interval);
     } else if (step === 2) {
       const timer = setTimeout(() => setStep(3), 1500);
       return () => clearTimeout(timer);
     } else if (step === 3) {
-      const timer = setTimeout(() => {
-        setAiText(aiMessage);
-        setStep(4);
-      }, 1500);
-      return () => clearTimeout(timer);
+      const words = aiMessage.split(' ');
+      let wordIndex = 0;
+      const interval = setInterval(() => {
+        const currentText = words.slice(0, wordIndex + 1).join(' ');
+        setAiText(currentText);
+        wordIndex++;
+        if (wordIndex >= words.length) {
+          clearInterval(interval);
+          setTimeout(() => setStep(4), 1000);
+        }
+      }, 150);
+      return () => clearInterval(interval);
     }
   }, [step]);
 
@@ -701,9 +718,7 @@ const SkillsWidget = () => {
                 <span className="text-sm font-mono text-transparent whitespace-pre select-none" aria-hidden="true">
                   {inputText}
                 </span>
-                {inputText.length < userMessage.length && (
-                  <span className="inline-block w-1.5 h-4 bg-cyber-accent animate-pulse ml-0.5"></span>
-                )}
+                <span className="inline-block w-1.5 h-4 bg-cyber-accent animate-pulse ml-0.5"></span>
               </div>
             )}
             <div className="absolute right-3 text-cyber-muted bg-cyber-bg/80 pl-2">
