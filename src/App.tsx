@@ -268,14 +268,14 @@ const Sidebar = ({ activeTab, setActiveTab }: {
     { id: 'summary', label: 'Summary', icon: LayoutDashboard },
     { id: 'skills', label: 'Skills', icon: BarChart2 },
     { id: 'experience', label: 'Experience', icon: Briefcase },
-    { id: 'architecture', label: 'Portfolio Architecture', icon: Layers },
+    { id: 'architecture', label: 'Projects', icon: Layers },
     { id: 'ai-mockup', label: 'Strategic Impact', icon: Zap },
   ];
 
   return (
     <>
       {/* Desktop Sidebar / Mobile Top Header */}
-      <div className="w-full lg:w-64 glass-panel border-b lg:border-b-0 lg:border-r border-cyber-border flex flex-col shrink-0 z-20 sticky top-0 lg:h-screen bg-cyber-bg/80 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none lg:overflow-y-auto custom-scrollbar">
+      <div className="w-full lg:w-64 glass-panel border-b lg:border-b-0 lg:border-r border-cyber-border flex flex-col shrink-0 z-20 sticky top-0 lg:h-screen bg-cyber-bg/80 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none lg:overflow-y-auto scrollbar-hide">
         <div className="p-4 lg:p-5 border-b border-cyber-border flex flex-row lg:flex-col items-center lg:items-center justify-between lg:justify-start shrink-0">
           <div className="flex items-center space-x-4 lg:space-x-0 lg:flex-col">
             <div className="w-12 h-12 lg:w-24 lg:h-24 rounded-full bg-cyber-panel border-2 border-cyber-accent flex items-center justify-center lg:mb-4 overflow-hidden relative group shrink-0">
@@ -358,7 +358,7 @@ const Sidebar = ({ activeTab, setActiveTab }: {
                 <item.icon size={18} className={activeTab === item.id ? 'text-white' : ''} />
               </div>
               <span className="text-[8px] font-medium uppercase tracking-tighter text-center leading-none">
-                {item.id === 'architecture' ? 'Portfolio' : item.id === 'ai-mockup' ? 'Impact' : item.label}
+                {item.id === 'architecture' ? 'Projects' : item.id === 'ai-mockup' ? 'Impact' : item.label}
               </span>
             </button>
           ))}
@@ -437,7 +437,7 @@ const SummaryWidget = () => (
     {/* Summary Box */}
     <div className="glass-panel p-4 lg:p-6 rounded-xl flex flex-col lg:flex-1 lg:min-h-0">
       <SectionTitle title="Professional Summary" icon={Activity} />
-      <div className="space-y-3 md:space-y-4 text-[13px] md:text-sm leading-relaxed text-cyber-muted pr-2 overflow-y-auto custom-scrollbar">
+      <div className="space-y-3 md:space-y-4 text-[13px] md:text-sm leading-relaxed text-cyber-muted pr-2 overflow-y-auto scrollbar-hide">
         <div className="flex items-start gap-2">
           <span className="text-cyber-accent font-mono mt-0.5 shrink-0">{'>'}</span> 
           <p>Versatile Product Manager and Business Analysis professional with over 3 years of collective experience driving product lifecycles, optimizing processes, and leading cross-functional teams.</p>
@@ -458,7 +458,7 @@ const SummaryWidget = () => (
       {/* Education Box */}
       <div className="glass-panel p-4 md:p-5 rounded-xl flex flex-col min-h-0">
         <SectionTitle title="Education" icon={GraduationCap} />
-        <div className="flex-1 pr-2 overflow-y-auto custom-scrollbar">
+        <div className="flex-1 pr-2 overflow-y-auto scrollbar-hide">
           <ul className="space-y-2 text-xs text-cyber-text">
             <li className="flex flex-col">
               <div className="flex justify-between items-start">
@@ -488,7 +488,7 @@ const SummaryWidget = () => (
       {/* Certifications Box */}
       <div className="glass-panel p-4 md:p-5 rounded-xl flex flex-col min-h-0">
         <SectionTitle title="Certifications" icon={Award} />
-        <div className="flex-1 pr-2 overflow-y-auto custom-scrollbar">
+        <div className="flex-1 pr-2 overflow-y-auto scrollbar-hide">
           <ul className="text-[10px] md:text-[11px] text-cyber-text flex flex-wrap gap-2">
             {[
               'Atlassian Agile Project Management Professional Certificate (Atlassian)', 
@@ -535,38 +535,21 @@ const SkillsWidget = () => {
       const timer = setTimeout(() => setStep(1), 1000);
       return () => clearTimeout(timer);
     } else if (step === 1) {
-      const words = userMessage.split(' ');
-      let wordIndex = 0;
-      const interval = setInterval(() => {
-        const currentText = words.slice(0, wordIndex + 1).join(' ');
-        setInputText(currentText);
-        wordIndex++;
-        if (wordIndex >= words.length) {
-          clearInterval(interval);
-          setTimeout(() => {
-            setUserText(userMessage);
-            setInputText('');
-            setStep(2);
-          }, 1000);
-        }
-      }, 250);
-      return () => clearInterval(interval);
+      const timer = setTimeout(() => {
+        setUserText(userMessage);
+        setInputText('');
+        setStep(2);
+      }, 1500);
+      return () => clearTimeout(timer);
     } else if (step === 2) {
-      const timer = setTimeout(() => setStep(3), 2000);
+      const timer = setTimeout(() => setStep(3), 1500);
       return () => clearTimeout(timer);
     } else if (step === 3) {
-      const words = aiMessage.split(' ');
-      let wordIndex = 0;
-      const interval = setInterval(() => {
-        const currentText = words.slice(0, wordIndex + 1).join(' ');
-        setAiText(currentText);
-        wordIndex++;
-        if (wordIndex >= words.length) {
-          clearInterval(interval);
-          setTimeout(() => setStep(4), 1000);
-        }
-      }, 200);
-      return () => clearInterval(interval);
+      const timer = setTimeout(() => {
+        setAiText(aiMessage);
+        setStep(4);
+      }, 1500);
+      return () => clearTimeout(timer);
     }
   }, [step]);
 
@@ -765,7 +748,7 @@ const ExperienceWidget = () => {
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
       className="glass-panel p-2.5 md:p-6 rounded-lg col-span-1 lg:col-span-2 flex flex-col md:flex-1 md:min-h-0"
     >
-      <SectionTitle title="Project Tracker" icon={Layout} />
+      <SectionTitle title="Experience Tracker" icon={Layout} />
       
       {/* Fixed Timeline Header for Mobile/Tablet */}
       <div className="md:hidden z-20 bg-cyber-panel/95 backdrop-blur-sm border-b border-cyber-border pb-2 mb-2 pt-1 text-[10px] font-mono text-cyber-muted uppercase tracking-wider flex justify-between w-full">
@@ -774,7 +757,7 @@ const ExperienceWidget = () => {
         ))}
       </div>
 
-      <div className="flex-1 overflow-x-auto overflow-y-auto mt-1 md:mt-4 pr-1 md:pr-2 custom-scrollbar">
+      <div className="flex-1 overflow-x-auto overflow-y-auto mt-1 md:mt-4 pr-1 md:pr-2 scrollbar-hide">
         <div className="min-w-full md:min-w-[800px]">
           {/* Header for Desktop */}
         <div className="hidden md:grid sticky top-0 z-10 bg-cyber-panel/95 backdrop-blur-sm grid-cols-12 gap-4 border-b border-cyber-border pb-3 mb-4 pt-1 text-xs font-mono text-cyber-muted uppercase tracking-wider">
@@ -1049,8 +1032,8 @@ const ArchitectureWidget = () => (
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
     className="col-span-1 lg:col-span-2 flex flex-col md:flex-1 md:min-h-0"
   >
-    <SectionTitle title="Portfolio Architecture" icon={Zap} />
-    <div className="flex-1 pr-2 overflow-y-auto custom-scrollbar pb-4">
+    <SectionTitle title="Projects Architecture" icon={Layers} />
+    <div className="flex-1 pr-2 overflow-y-auto scrollbar-hide pb-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
         {[...projectsData, ...portfolioProjectsData].map((project, idx) => (
           <motion.div 
@@ -1123,36 +1106,10 @@ const AILiveWidget = () => {
 
     const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-    // Step 1: First line slowly (character by character)
-    const firstLine = scriptSteps[0];
-    let currentFirstLine = "";
-    setLogs([""]); 
-    for (let i = 0; i < firstLine.length; i++) {
-      currentFirstLine += firstLine[i];
-      setLogs([currentFirstLine]);
-      await sleep(60); // Slow character typing
-    }
-    await sleep(600);
-
-    // Step 2: Other lines word by word
-    for (let i = 1; i < scriptSteps.length; i++) {
+    for (let i = 0; i < scriptSteps.length; i++) {
       const line = scriptSteps[i];
-      const words = line.split(" ");
-      let currentLine = "";
-      
-      // Add a new empty line to logs
-      setLogs(prev => [...prev, ""]);
-      
-      for (let j = 0; j < words.length; j++) {
-        currentLine += (j === 0 ? "" : " ") + words[j];
-        setLogs(prev => {
-          const newLogs = [...prev];
-          newLogs[i] = currentLine;
-          return newLogs;
-        });
-        await sleep(200); // Word by word typing
-      }
-      await sleep(400);
+      setLogs(prev => [...prev, line]);
+      await sleep(800); // Consistent delay between full lines
     }
 
     setIsRunning(false);
@@ -1177,7 +1134,7 @@ const AILiveWidget = () => {
             </div>
             <span className="text-[8px] md:text-[10px] font-mono text-cyber-muted truncate ml-2">ankur@client-strategy:~</span>
           </div>
-          <div className="p-2.5 md:p-4 font-mono text-[9px] md:text-xs text-cyber-muted flex-1 overflow-y-auto space-y-1.5 md:space-y-2 custom-scrollbar">
+          <div className="p-2.5 md:p-4 font-mono text-[9px] md:text-xs text-cyber-muted flex-1 overflow-y-auto space-y-1.5 md:space-y-2 scrollbar-hide">
             {!hasStarted ? (
               <div className="h-full flex flex-col items-center justify-center opacity-40">
                 <Terminal size={32} className="mb-4" />
@@ -1403,9 +1360,9 @@ export default function App() {
         </header>
 
         {/* Main Content Area */}
-        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto lg:overflow-hidden custom-scrollbar flex flex-col">
-          <div className="w-full flex-1 max-w-7xl mx-auto flex flex-col p-4 lg:p-6 lg:min-h-0">
-            <div className="flex-1 flex flex-col lg:min-h-0">
+        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto lg:overflow-hidden scrollbar-hide flex flex-col">
+          <div className="w-full flex-1 max-w-7xl mx-auto flex flex-col items-center p-4 lg:p-6 lg:min-h-0">
+            <div className="w-full flex-1 flex flex-col lg:min-h-0">
               {renderContent()}
             </div>
           </div>
