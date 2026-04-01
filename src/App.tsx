@@ -275,27 +275,27 @@ const Sidebar = ({ activeTab, setActiveTab }: {
   return (
     <>
       {/* Desktop Sidebar / Mobile Top Header */}
-      <div className="w-full lg:w-64 glass-panel border-b lg:border-b-0 lg:border-r border-cyber-border flex flex-col shrink-0 z-20 sticky top-0 lg:h-screen bg-cyber-bg/80 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none lg:overflow-y-auto custom-scrollbar">
-        <div className="p-4 lg:p-5 border-b border-cyber-border flex flex-row lg:flex-col items-center lg:items-center justify-between lg:justify-start shrink-0">
-          <div className="flex items-center space-x-4 lg:space-x-0 lg:flex-col">
-            <div className="w-12 h-12 lg:w-24 lg:h-24 rounded-full bg-cyber-panel border-2 border-cyber-accent flex items-center justify-center lg:mb-4 overflow-hidden relative group shrink-0">
+      <div className="w-full md:w-64 glass-panel border-b md:border-b-0 md:border-r border-cyber-border flex flex-col shrink-0 z-20 sticky top-0 md:h-screen bg-cyber-bg/80 backdrop-blur-md md:bg-transparent md:backdrop-blur-none md:overflow-y-auto custom-scrollbar">
+        <div className="p-4 md:p-5 border-b border-cyber-border flex flex-row md:flex-col items-center md:items-center justify-between md:justify-start shrink-0">
+          <div className="flex items-center space-x-4 md:space-x-0 md:flex-col">
+            <div className="w-12 h-12 md:w-24 md:h-24 rounded-full bg-cyber-panel border-2 border-cyber-accent flex items-center justify-center md:mb-4 overflow-hidden relative group shrink-0">
               <div className="absolute inset-0 bg-cyber-accent/20 group-hover:bg-cyber-accent/40 transition-colors z-10"></div>
               <img src="https://raw.githubusercontent.com/ankur-the-analyst/Webpage-Techsite-/main/pic.jpeg" alt="Ankur Madan" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
             </div>
             <div>
-              <h1 className="text-base lg:text-lg font-bold text-cyber-text lg:text-center tracking-tight">Ankur Madan</h1>
-              <p className="text-[10px] lg:text-xs font-mono text-cyber-accent mt-0.5 lg:mt-1 uppercase tracking-wider">Product Manager</p>
+              <h1 className="text-base md:text-lg font-bold text-cyber-text md:text-center tracking-tight">Ankur Madan</h1>
+              <p className="text-[10px] md:text-xs font-mono text-cyber-accent mt-0.5 md:mt-1 uppercase tracking-wider">Product Manager</p>
             </div>
           </div>
-          <div className="hidden lg:block">
+          <div className="hidden md:block">
             <p className="text-xs font-mono text-cyber-muted mt-1 text-center">Delhi, India</p>
           </div>
         </div>
 
         {/* Nav and Footer Area */}
-        <div className="hidden lg:flex flex-col flex-1 min-h-0">
+        <div className="hidden md:flex flex-col flex-1 min-h-0">
           {/* Desktop Navigation */}
-          <div className="flex-1 py-4 lg:py-6">
+          <div className="flex-1 py-4 md:py-6">
             <nav className="flex flex-col space-y-1 px-3 w-full">
               {navItems.map((item) => (
                 <button
@@ -315,7 +315,7 @@ const Sidebar = ({ activeTab, setActiveTab }: {
           </div>
 
           {/* Desktop Footer */}
-          <div className="p-4 lg:p-6 border-t border-cyber-border space-y-4 shrink-0">
+          <div className="p-4 md:p-6 border-t border-cyber-border space-y-4 shrink-0">
             <a href="mailto:talkwithankurmadan@gmail.com" className="flex items-center space-x-3 text-cyber-muted hover:text-cyber-accent transition-colors text-xs font-mono">
               <Mail size={14} className="shrink-0" />
               <span className="truncate text-ellipsis overflow-hidden">talkwithankurmadan@gmail.com</span>
@@ -328,23 +328,25 @@ const Sidebar = ({ activeTab, setActiveTab }: {
               <Linkedin size={14} className="shrink-0" />
               <span className="truncate text-ellipsis overflow-hidden">linkedin.com/in/ankur-madan</span>
             </a>
-            <a 
-              href="https://drive.google.com/file/d/1uRKq0ZBmFvonrYHmF61wBY1swb--UVEE/view?usp=drive_link" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center space-x-3 text-cyber-muted hover:text-cyber-accent transition-colors text-xs font-mono"
-            >
-              <Download size={14} className="shrink-0" />
-              <span className="truncate text-ellipsis overflow-hidden">Download Resume</span>
-            </a>
+            <div className="pt-2">
+              <a 
+                href="https://drive.google.com/file/d/1uRKq0ZBmFvonrYHmF61wBY1swb--UVEE/view?usp=drive_link" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full py-2 rounded font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 bg-cyber-accent/10 text-cyber-accent border border-cyber-accent hover:bg-cyber-accent hover:text-cyber-bg glow-accent"
+              >
+                <Download size={14} />
+                <span>Download Resume</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Mobile Bottom Navigation */}
-      <div className="lg:hidden fixed bottom-0 left-0 w-full glass-panel border-t border-cyber-border z-30 px-1 py-1 bg-cyber-bg/90 backdrop-blur-lg">
+      <div className="md:hidden fixed bottom-0 left-0 w-full glass-panel border-t border-cyber-border z-30 px-1 py-1 bg-cyber-bg/90 backdrop-blur-lg">
         <nav className="flex justify-around items-center h-16">
-          {[...navItems, { id: 'profile', label: 'Contact', icon: User }].map((item) => (
+          {[...navItems, { id: 'profile', label: 'Profile', icon: User }].map((item) => (
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
@@ -393,9 +395,9 @@ const SectionTitle = ({ title, icon: Icon }: { title: string, icon: any }) => (
 const ProfileWidget = () => (
   <motion.div 
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-    className="flex-1 flex items-center justify-center p-4"
+    className="col-span-1 lg:col-span-2 flex flex-col gap-4 md:gap-6 md:flex-1 md:min-h-0"
   >
-    <div className="glass-panel p-6 rounded-xl flex flex-col w-full max-w-sm">
+    <div className="glass-panel p-4 md:p-6 rounded-xl flex flex-col">
       <SectionTitle title="Contact & Resume" icon={User} />
       <div className="space-y-4 text-[13px] md:text-sm leading-relaxed text-cyber-muted pr-2">
         <a href="mailto:talkwithankurmadan@gmail.com" className="flex items-center space-x-3 text-cyber-muted hover:text-cyber-accent transition-colors text-xs font-mono">
@@ -430,10 +432,10 @@ const ProfileWidget = () => (
 const SummaryWidget = () => (
   <motion.div 
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-    className="col-span-1 lg:col-span-2 flex flex-col gap-4 lg:gap-6 lg:flex-1 lg:min-h-0"
+    className="col-span-1 lg:col-span-2 flex flex-col gap-4 md:gap-6 md:flex-1 md:min-h-0"
   >
     {/* Summary Box */}
-    <div className="glass-panel p-4 lg:p-6 rounded-xl flex flex-col lg:flex-1 lg:min-h-0">
+    <div className="glass-panel p-4 md:p-6 rounded-xl flex flex-col md:flex-1 md:min-h-0">
       <SectionTitle title="Professional Summary" icon={Activity} />
       <div className="space-y-3 md:space-y-4 text-[13px] md:text-sm leading-relaxed text-cyber-muted pr-2 overflow-y-auto custom-scrollbar">
         <div className="flex items-start gap-2">
@@ -452,9 +454,9 @@ const SummaryWidget = () => (
     </div>
     
     {/* Education & Certifications Container */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 flex-1 min-h-0">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 min-h-0">
       {/* Education Box */}
-      <div className="glass-panel p-4 md:p-5 rounded-xl flex flex-col min-h-0">
+      <div className="glass-panel p-3 md:p-5 rounded-xl flex flex-col min-h-0">
         <SectionTitle title="Education" icon={GraduationCap} />
         <div className="flex-1 pr-2 overflow-y-auto custom-scrollbar">
           <ul className="space-y-2 text-xs text-cyber-text">
@@ -484,7 +486,7 @@ const SummaryWidget = () => (
       </div>
 
       {/* Certifications Box */}
-      <div className="glass-panel p-4 md:p-5 rounded-xl flex flex-col min-h-0">
+      <div className="glass-panel p-3 md:p-5 rounded-xl flex flex-col min-h-0">
         <SectionTitle title="Certifications" icon={Award} />
         <div className="flex-1 pr-2 overflow-y-auto custom-scrollbar">
           <ul className="text-[10px] md:text-[11px] text-cyber-text flex flex-wrap gap-2">
@@ -497,7 +499,7 @@ const SummaryWidget = () => (
               'BI Fundamentals (Simplilearn)',
               'Excel Crash Course (CFI)'
             ].map(cert => (
-              <li key={cert} className="bg-cyber-bg px-2 py-1.5 rounded-md text-[10px] border border-cyber-border leading-tight hover:border-cyber-accent/50 transition-colors">{cert}</li>
+              <li key={cert} className="bg-cyber-bg px-1.5 py-1 md:px-2 md:py-1.5 rounded-md text-[9px] md:text-[10px] border border-cyber-border leading-tight hover:border-cyber-accent/50 transition-colors">{cert}</li>
             ))}
           </ul>
         </div>
@@ -569,8 +571,8 @@ const SkillsWidget = () => {
   }, [step]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:flex-1 lg:min-h-0">
-    <div className="glass-panel p-4 lg:p-6 rounded-lg flex flex-col min-h-[350px] lg:h-auto lg:min-h-0">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:flex-1 md:min-h-0">
+    <div className="glass-panel p-4 md:p-6 rounded-lg flex flex-col min-h-[350px] lg:h-auto lg:min-h-0">
       <SectionTitle title="Core Competencies" icon={PieChart} />
       <div className="flex-1 w-full relative mt-4 min-h-[250px] lg:min-h-0">
         <ResponsiveContainer width="100%" height="100%">
@@ -765,16 +767,9 @@ const ExperienceWidget = () => {
     >
       <SectionTitle title="Project Tracker" icon={Layout} />
       
-      {/* Fixed Timeline Header for Mobile/Tablet */}
-      <div className="md:hidden z-20 bg-cyber-panel/95 backdrop-blur-sm border-b border-cyber-border pb-2 mb-2 pt-1 text-[10px] font-mono text-cyber-muted uppercase tracking-wider flex justify-between w-full">
-        {Array.from({ length: totalYears + 1 }).map((_, i) => (
-          <span key={i}>{minYear + i}</span>
-        ))}
-      </div>
-
       <div className="flex-1 overflow-x-auto overflow-y-auto mt-1 md:mt-4 pr-1 md:pr-2 custom-scrollbar">
         <div className="min-w-full md:min-w-[800px]">
-          {/* Header for Desktop */}
+          {/* Header */}
         <div className="hidden md:grid sticky top-0 z-10 bg-cyber-panel/95 backdrop-blur-sm grid-cols-12 gap-4 border-b border-cyber-border pb-3 mb-4 pt-1 text-xs font-mono text-cyber-muted uppercase tracking-wider">
           <div className="col-span-3">Organization</div>
           <div className="col-span-3">Role & Focus</div>
@@ -1347,14 +1342,14 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen overflow-hidden bg-cyber-bg text-cyber-text flex flex-col lg:flex-row font-sans selection:bg-cyber-accent selection:text-cyber-bg">
+    <div className="h-screen overflow-hidden bg-cyber-bg text-cyber-text flex flex-col md:flex-row font-sans selection:bg-cyber-accent selection:text-cyber-bg">
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
       
-      <main className="flex-1 flex flex-col relative overflow-hidden pb-16 lg:pb-0">
+      <main className="flex-1 flex flex-col relative overflow-hidden pb-16 md:pb-0">
         {/* Top Header KPIs - Fixed at top */}
-        <header className="block p-3 lg:p-4 border-b border-cyber-border bg-cyber-bg/80 backdrop-blur-md z-10 shrink-0">
+        <header className="block p-3 md:p-4 border-b border-cyber-border bg-cyber-bg/80 backdrop-blur-md z-10 shrink-0">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
               <KPICard title="Core Focus" value="PM/BA/CRM" icon={Cpu} delay={0.1} />
               <KPICard title="Total Experience" value="3+ Yrs" icon={Briefcase} delay={0.2} />
               <KPICard title="SaaS Operated" value="15+" icon={Zap} delay={0.3} />
@@ -1364,9 +1359,9 @@ export default function App() {
         </header>
 
         {/* Main Content Area */}
-        <div className="flex-1 overflow-y-auto lg:overflow-hidden custom-scrollbar flex flex-col">
-          <div className="w-full flex-1 max-w-7xl mx-auto flex flex-col p-4 lg:p-6 lg:min-h-0">
-            <div className="flex-1 flex flex-col lg:min-h-0">
+        <div className="flex-1 overflow-y-auto md:overflow-hidden custom-scrollbar flex flex-col">
+          <div className="w-full flex-1 max-w-7xl mx-auto flex flex-col p-4 md:p-6 md:min-h-0">
+            <div className="flex-1 flex flex-col md:min-h-0">
               {renderContent()}
             </div>
           </div>
