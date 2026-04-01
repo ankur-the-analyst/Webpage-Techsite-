@@ -570,7 +570,7 @@ const SkillsWidget = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:flex-1 lg:min-h-0">
-    <div className="glass-panel p-4 lg:p-6 rounded-lg flex flex-col min-h-[350px] lg:h-auto lg:min-h-0">
+    <div className="glass-panel p-4 lg:p-6 rounded-lg flex flex-col min-h-[350px] lg:h-auto lg:min-h-0 order-2 lg:order-1">
       <SectionTitle title="Core Competencies" icon={PieChart} />
       <div className="flex-1 w-full relative mt-4 min-h-[250px] lg:min-h-0">
         <ResponsiveContainer width="100%" height="100%">
@@ -592,7 +592,7 @@ const SkillsWidget = () => {
 
       <motion.div 
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-        className="flex flex-col glass-panel rounded-lg overflow-hidden relative min-h-[400px] lg:h-auto lg:min-h-0"
+        className="flex flex-col glass-panel rounded-lg overflow-hidden relative min-h-[400px] lg:h-auto lg:min-h-0 order-1 lg:order-2"
       >
         {/* Chat Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-cyber-border bg-cyber-panel/40 backdrop-blur-sm z-10 shrink-0">
@@ -1099,6 +1099,7 @@ const ArchitectureWidget = () => (
 
 const AILiveWidget = () => {
   const [isRunning, setIsRunning] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const [logs, setLogs] = useState<string[]>([]);
   const [showMockup, setShowMockup] = useState(false);
   const intervalRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -1114,6 +1115,7 @@ const AILiveWidget = () => {
   const runScript = () => {
     if (isRunning) return;
     setIsRunning(true);
+    setHasStarted(true);
     setLogs([]);
     setShowMockup(false);
 
@@ -1163,33 +1165,42 @@ const AILiveWidget = () => {
             <span className="text-[8px] md:text-[10px] font-mono text-cyber-muted truncate ml-2">ankur@client-strategy:~</span>
           </div>
           <div className="p-2.5 md:p-4 font-mono text-[9px] md:text-xs text-cyber-muted flex-1 overflow-y-auto space-y-1.5 md:space-y-2 custom-scrollbar">
-            <p className="text-cyber-text">Welcome to the Client-Centric Strategy Engine.</p>
-            <div className="mt-4">
-              <span className="text-cyber-accent">ankur@admin:~$</span> ./architect-solution.sh
-            </div>
-            {logs.map((log, i) => (
-              <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
-                <span className={log?.includes("SUCCESSFUL") ? "text-cyber-accent" : "text-cyber-muted"}>{log}</span>
-              </motion.div>
-            ))}
-            {isRunning && (
-              <motion.div animate={{ opacity: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }}>
-                <span className="inline-block w-2 h-4 bg-cyber-accent ml-1 align-middle"></span>
-              </motion.div>
+            {!hasStarted ? (
+              <div className="h-full flex flex-col items-center justify-center opacity-40">
+                <Terminal size={32} className="mb-4" />
+                <p className="text-center uppercase tracking-widest">System Idle. Awaiting Initiation.</p>
+              </div>
+            ) : (
+              <>
+                <p className="text-cyber-text">Welcome to the Client-Centric Strategy Engine.</p>
+                <div className="mt-4">
+                  <span className="text-cyber-accent">ankur@admin:~$</span> ./architect-solution.sh
+                </div>
+                {logs.map((log, i) => (
+                  <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
+                    <span className={log?.includes("SUCCESSFUL") ? "text-cyber-accent" : "text-cyber-muted"}>{log}</span>
+                  </motion.div>
+                ))}
+                {isRunning && (
+                  <motion.div animate={{ opacity: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }}>
+                    <span className="inline-block w-2 h-4 bg-cyber-accent ml-1 align-middle"></span>
+                  </motion.div>
+                )}
+              </>
             )}
           </div>
           <div className="p-4 border-t border-cyber-border bg-cyber-panel">
             <button 
               onClick={runScript}
               disabled={isRunning}
-              className={`w-full py-2 rounded font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 ${
+              className={`w-full py-3 rounded font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 ${
                 isRunning 
                   ? 'bg-cyber-border text-cyber-muted cursor-not-allowed' 
-                  : 'bg-cyber-accent/10 text-cyber-accent border border-cyber-accent hover:bg-cyber-accent hover:text-cyber-bg glow-accent'
+                  : 'bg-cyber-accent/10 text-cyber-accent border border-cyber-accent hover:bg-cyber-accent hover:text-cyber-bg glow-accent animate-pulse-slow'
               }`}
             >
-              <Zap size={14} />
-              <span>{isRunning ? 'Architecting...' : 'Architect Strategic Solution'}</span>
+              <Zap size={14} className={isRunning ? "" : "animate-bounce"} />
+              <span>{isRunning ? 'Architecting...' : hasStarted ? 'Re-Architect Solution' : 'Click to Start'}</span>
             </button>
           </div>
         </div>
@@ -1321,6 +1332,13 @@ export default function App() {
         0% { top: 0; }
         50% { top: 100%; }
         100% { top: 0; }
+      }
+      @keyframes pulse-slow {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.8; transform: scale(0.98); }
+      }
+      .animate-pulse-slow {
+        animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
       }
     `;
     document.head.appendChild(style);
