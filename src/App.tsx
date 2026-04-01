@@ -354,7 +354,9 @@ const Sidebar = ({ activeTab, setActiveTab }: {
                   : 'text-cyber-muted'
               }`}
             >
-              <item.icon size={18} className={activeTab === item.id ? 'text-cyber-accent' : ''} />
+              <div className={`p-2 rounded-full transition-all duration-300 ${activeTab === item.id ? 'bg-black/60 shadow-[inset_0_0_10px_rgba(0,0,0,0.5)]' : 'bg-transparent'}`}>
+                <item.icon size={18} className={activeTab === item.id ? 'text-white' : ''} />
+              </div>
               <span className="text-[8px] font-medium uppercase tracking-tighter text-center leading-none">
                 {item.id === 'architecture' ? 'Portfolio' : item.id === 'ai-mockup' ? 'Impact' : item.label}
               </span>
@@ -1102,17 +1104,8 @@ const AILiveWidget = () => {
   const [hasStarted, setHasStarted] = useState(false);
   const [logs, setLogs] = useState<string[]>([]);
   const [showMockup, setShowMockup] = useState(false);
-  const intervalRef = React.useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, []);
-
-  const runScript = () => {
+  const runScript = async () => {
     if (isRunning) return;
     setIsRunning(true);
     setHasStarted(true);
@@ -1128,22 +1121,42 @@ const AILiveWidget = () => {
       "> CLIENT-CENTRIC STRATEGY DEPLOYED."
     ];
 
-    let currentStep = 0;
-    intervalRef.current = setInterval(() => {
-      if (currentStep < scriptSteps.length) {
-        const step = scriptSteps[currentStep];
-        if (step) {
-          setLogs(prev => [...prev, step]);
-        }
-        currentStep++;
-      } else {
-        if (intervalRef.current) {
-          clearInterval(intervalRef.current);
-        }
-        setIsRunning(false);
-        setTimeout(() => setShowMockup(true), 500);
+    const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+    // Step 1: First line slowly (character by character)
+    const firstLine = scriptSteps[0];
+    let currentFirstLine = "";
+    setLogs([""]); 
+    for (let i = 0; i < firstLine.length; i++) {
+      currentFirstLine += firstLine[i];
+      setLogs([currentFirstLine]);
+      await sleep(60); // Slow character typing
+    }
+    await sleep(600);
+
+    // Step 2: Other lines word by word
+    for (let i = 1; i < scriptSteps.length; i++) {
+      const line = scriptSteps[i];
+      const words = line.split(" ");
+      let currentLine = "";
+      
+      // Add a new empty line to logs
+      setLogs(prev => [...prev, ""]);
+      
+      for (let j = 0; j < words.length; j++) {
+        currentLine += (j === 0 ? "" : " ") + words[j];
+        setLogs(prev => {
+          const newLogs = [...prev];
+          newLogs[i] = currentLine;
+          return newLogs;
+        });
+        await sleep(200); // Word by word typing
       }
-    }, 600);
+      await sleep(400);
+    }
+
+    setIsRunning(false);
+    setTimeout(() => setShowMockup(true), 500);
   };
 
   return (
@@ -1323,6 +1336,14 @@ const AILiveWidget = () => {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('summary');
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+
+  // Scroll to top when activeTab changes
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [activeTab]);
 
   // Add custom animation keyframes to document
   useEffect(() => {
@@ -1382,7 +1403,7 @@ export default function App() {
         </header>
 
         {/* Main Content Area */}
-        <div className="flex-1 overflow-y-auto lg:overflow-hidden custom-scrollbar flex flex-col">
+        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto lg:overflow-hidden custom-scrollbar flex flex-col">
           <div className="w-full flex-1 max-w-7xl mx-auto flex flex-col p-4 lg:p-6 lg:min-h-0">
             <div className="flex-1 flex flex-col lg:min-h-0">
               {renderContent()}
