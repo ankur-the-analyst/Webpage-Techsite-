@@ -284,7 +284,7 @@ const Sidebar = ({ activeTab, setActiveTab }: {
             </div>
             <div>
               <h1 className="text-base lg:text-lg font-bold text-cyber-text lg:text-center tracking-tight">Ankur Madan</h1>
-              <p className="text-[10px] lg:text-xs font-mono text-cyber-accent mt-0.5 lg:mt-1 uppercase tracking-wider">Product Manager</p>
+              <p className="text-[10px] lg:text-xs font-mono text-cyber-accent mt-0.5 lg:mt-1 uppercase tracking-wider">Project Manager</p>
             </div>
           </div>
           <div className="hidden lg:block">
@@ -440,7 +440,7 @@ const SummaryWidget = () => (
       <div className="space-y-3 md:space-y-6 text-[13px] md:text-base leading-relaxed text-cyber-muted pr-2 overflow-y-auto scrollbar-hide">
         <div className="flex items-start gap-2">
           <span className="text-cyber-accent font-mono mt-0.5 shrink-0">{'>'}</span> 
-          <p>Versatile Product Manager and Business Analysis professional with over 3 years of collective experience driving product lifecycles, optimizing processes, and leading cross-functional teams.</p>
+          <p>Versatile Project Manager and Business Analysis professional with over 3 years of collective experience driving product lifecycles, optimizing processes, and leading cross-functional teams.</p>
         </div>
         <div className="flex items-start gap-2">
           <span className="text-cyber-accent font-mono mt-0.5 shrink-0">{'>'}</span> 
@@ -571,15 +571,14 @@ const SkillsWidget = () => {
   }, [step]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:flex-1 md:min-h-0">
-    <div className="glass-panel p-4 lg:p-6 rounded-lg flex flex-col min-h-[350px] md:h-auto md:min-h-0 order-2 lg:order-1">
+    <div className="grid grid-cols-1 md:grid-rows-2 lg:grid-rows-1 lg:grid-cols-2 gap-4 lg:gap-6 md:flex-1 md:min-h-0">
+    <div className="glass-panel p-4 lg:p-6 rounded-lg flex flex-col min-h-[300px] md:min-h-0 order-2 lg:order-1">
       <SectionTitle title="Core Competencies" icon={PieChart} />
-      <div className="flex-1 w-full relative mt-4 min-h-[250px] md:min-h-0">
+      <div className="flex-1 w-full relative mt-2 md:mt-4 min-h-[200px] md:min-h-0">
         <ResponsiveContainer width="100%" height="100%">
           <Treemap
             data={coreCompetenciesData}
             dataKey="size"
-            aspectRatio={4 / 3}
             stroke="var(--color-cyber-bg)"
             content={<TreemapCustomContent />}
             isAnimationActive={false}
@@ -594,7 +593,7 @@ const SkillsWidget = () => {
 
       <motion.div 
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}
-        className="flex flex-col glass-panel rounded-lg overflow-hidden relative min-h-[400px] md:h-auto md:min-h-0 order-1 lg:order-2"
+        className="flex flex-col glass-panel rounded-lg overflow-hidden relative min-h-[350px] md:min-h-0 order-1 lg:order-2"
       >
         {/* Chat Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-cyber-border bg-cyber-panel/40 backdrop-blur-sm z-10 shrink-0">
