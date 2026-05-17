@@ -97,7 +97,7 @@ const experienceData = [
   {
     id: 1,
     company: 'Effred Technologies',
-    role: 'Project Manager',
+    role: 'Consultant',
     focus: 'PRDs, Agile sprints, MVP prototyping, BRDs/FRDs',
     status: 'Active Sprint',
     startMonth: 'Sep',
