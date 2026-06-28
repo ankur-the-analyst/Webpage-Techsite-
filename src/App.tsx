@@ -109,7 +109,7 @@ const experienceData = [
   {
     id: 2,
     company: 'G.L. Bajaj Institute of Management & Research',
-    role: 'Trainer - Data Analytics',
+    role: 'Trainer - Business Analytics & AI',
     focus: 'Excel, AI for Managers, Power BI, workshops',
     status: 'Active Sprint',
     startMonth: 'Jun',
@@ -169,7 +169,7 @@ const experienceData = [
   {
     id: 7,
     company: 'GrowthPal',
-    role: 'Data Analyst Intern',
+    role: 'Business Analyst Intern',
     focus: 'Data sources integration, data cleaning, client mandates',
     status: 'Archived',
     startMonth: 'Aug',
